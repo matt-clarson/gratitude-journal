@@ -5,11 +5,47 @@
     var(--theme-primary-gradient)
   );
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1vh 2vw;
+
   .theme-header-title {
     margin: 0;
+    flex-grow: 1;
+
+    &:not(:first-child) {
+      margin-left: 1vw;
+    }
 
     .theme-header-title-content {
       color: inherit;
+    }
+  }
+
+  .theme-header-actions {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 35%;
+  }
+
+  .theme-header-action-button {
+    background: none;
+    border: none;
+    border-radius: 5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: min-content;
+    font-size: 1rem;
+    color: inherit;
+    font-family: inherit;
+    padding: 5px 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.2);
     }
   }
 }
