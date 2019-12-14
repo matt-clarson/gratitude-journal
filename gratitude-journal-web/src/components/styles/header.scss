@@ -1,0 +1,15 @@
+.theme-header {
+  background: linear-gradient(
+    45deg,
+    var(--theme-primary),
+    var(--theme-primary-gradient)
+  );
+
+  .theme-header-title {
+    margin: 0;
+
+    .theme-header-title-content {
+      color: inherit;
+    }
+  }
+}
