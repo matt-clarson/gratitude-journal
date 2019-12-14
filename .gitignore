@@ -1,0 +1,8 @@
+# web
+node_modules/
+
+# service
+venv/
+__pycache__/
+db.sqlite3
+
