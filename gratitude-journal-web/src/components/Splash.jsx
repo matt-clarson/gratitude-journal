@@ -5,16 +5,13 @@ import { bem, classes } from "./utils/css";
 
 import "./styles/splash.scss";
 
-const Splash = ({ children, left = false, right = false, ...baseProps }) => {
+const Splash = ({ children, position = "default", ...baseProps }) => {
   const css = bem`theme-splash`;
   if (!baseProps.tag) baseProps.open = true;
   return (
     <ComponentFactory
       defaultTag="dialog"
-      className={classes(
-        css,
-        left ? css.mod`left` : right ? css.mod`right` : ""
-      )}
+      className={classes(css, css.mod`${position}`)}
       {...baseProps}
     >
       {children}
@@ -23,7 +20,8 @@ const Splash = ({ children, left = false, right = false, ...baseProps }) => {
 };
 
 Splash.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  position: PropTypes.string
 };
 
 export default Splash;

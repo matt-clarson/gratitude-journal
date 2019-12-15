@@ -1,14 +1,18 @@
 const stringify = obj => ({ ...obj, toString: () => obj.name });
 
-export const bem = ([block]) =>
+const parse = (strings, ...args) =>
+  strings.reduce((acc, string) => `${acc}${args.shift()}${string}`);
+
+export const bem = (...blockArgs) =>
   stringify({
-    name: block,
-    elem: ([elem]) =>
+    name: parse(...blockArgs),
+    elem: (...elemArgs) =>
       stringify({
-        name: `${block}--${elem}`,
-        mod: ([mod]) => `${block}--${elem}__${mod}`
+        name: `${parse(...blockArgs)}--${parse(...elemArgs)}`,
+        mod: (...modArgs) =>
+          `${parse(...blockArgs)}--${parse(...elemArgs)}__${parse(...modArgs)}`
       }),
-    mod: ([mod]) => `${block}__${mod}`
+    mod: (...modArgs) => `${parse(...blockArgs)}__${parse(...modArgs)}`
   });
 
 export const classes = (...cssClasses) => cssClasses.join(" ");

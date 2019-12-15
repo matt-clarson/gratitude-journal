@@ -5,15 +5,11 @@ import { bem, classes } from "./utils/css";
 
 import "./styles/splash.scss";
 
-const SplashTitleSubHeader = ({
-  children,
-  position = "default",
-  ...baseProps
-}) => {
-  const css = bem`theme-splash`.elem`title-sub-header`;
+const SplashActions = ({ position = "default", children, ...baseProps }) => {
+  const css = bem`theme-splash`.elem`actions`;
   return (
     <ComponentFactory
-      defaultTag="p"
+      defaultTag="nav"
       className={classes(css, css.mod`${position}`)}
       {...baseProps}
     >
@@ -22,9 +18,11 @@ const SplashTitleSubHeader = ({
   );
 };
 
-SplashTitleSubHeader.propTypes = {
+SplashActions.propTypes = {
   children: PropTypes.node.isRequired,
-  position: PropTypes.string
+  left: PropTypes.bool,
+  right: PropTypes.bool,
+  centre: PropTypes.bool
 };
 
-export default SplashTitleSubHeader;
+export default SplashActions;

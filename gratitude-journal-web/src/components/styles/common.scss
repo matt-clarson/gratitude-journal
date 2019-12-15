@@ -7,3 +7,24 @@
   );
   color: var(--theme-text-on-primary);
 }
+
+%button-base {
+  background: none;
+  border: none;
+  border-radius: 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: min-content;
+  font-size: 1rem;
+  color: inherit;
+  font-family: inherit;
+  padding: 5px 5px;
+  cursor: pointer;
+}
+
+%transparent-button {
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+  }
+}

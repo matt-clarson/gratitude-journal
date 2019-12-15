@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Welcome from "./pages/Welcome";
+import LogIn from "./pages/LogIn";
 
 export default () => (
   <Switch>
@@ -10,6 +11,10 @@ export default () => (
 
     <Route path="/welcome">
       <Welcome />
+    </Route>
+
+    <Route path="/log-in">
+      <LogIn />
     </Route>
 
     <Route path="/somewhere">
