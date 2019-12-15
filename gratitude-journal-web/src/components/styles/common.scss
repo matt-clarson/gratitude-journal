@@ -1,0 +1,8 @@
+@mixin primary-background {
+  background: var(--theme-primary);
+  background: linear-gradient(
+    45deg,
+    var(--theme-primary),
+    var(--theme-primary-gradient)
+  );
+}

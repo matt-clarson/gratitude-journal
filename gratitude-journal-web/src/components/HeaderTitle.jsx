@@ -1,21 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ComponentFactory from "./utils/ComponentFactory";
 
 import "./styles/header.scss";
 
-const HeaderTitle = ({ children, tag = "span", ...baseProps }) => {
-  const Tag = tag;
-  return (
-    <h1 className="theme-header-title">
-      <Tag className="theme-header-title-content" {...baseProps}>
-        {children}
-      </Tag>
-    </h1>
-  );
-};
+const HeaderTitle = ({ children, ...baseProps }) => (
+  <h1 className="theme-header-title">
+    <ComponentFactory
+      defaultTag="span"
+      className="theme-header-title-content"
+      {...baseProps}
+    >
+      {children}
+    </ComponentFactory>
+  </h1>
+);
 
 HeaderTitle.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.node.isRequired
 };
 
 export default HeaderTitle;

@@ -1,9 +1,7 @@
+@import "./common.scss";
+
 .theme-header {
-  background: linear-gradient(
-    45deg,
-    var(--theme-primary),
-    var(--theme-primary-gradient)
-  );
+  @include primary-background;
 
   display: flex;
   align-items: center;

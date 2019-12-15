@@ -1,17 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ComponentFactory from "./utils/ComponentFactory";
 
 import "./styles/header.scss";
 
 const HeaderActions = ({ children }) => (
-  <div className="theme-header-actions">{children}</div>
+  <ComponentFactory defaultTag="div" className="theme-header-actions">
+    {children}
+  </ComponentFactory>
 );
 
 HeaderActions.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
-  ]).isRequired
+  children: PropTypes.node.isRequired
 };
 
 export default HeaderActions;

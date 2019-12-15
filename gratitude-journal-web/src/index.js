@@ -11,7 +11,9 @@ const App = () => (
     <Theme
       colours={{
         primary: "#0083b0",
-        primaryGradient: "#00b4db"
+        primaryGradient: "#00b4db",
+        textOnPrimary: "#ffffff",
+        textOnSurface: "#000000"
       }}
     >
       <GratitudeJournal />
