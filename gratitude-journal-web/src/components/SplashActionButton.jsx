@@ -8,7 +8,7 @@ import "./styles/splash.scss";
 const SplashActionButton = ({ children, onClick, ...baseProps }) => (
   <ComponentFactory
     defaultTag="button"
-    className={bem`theme-splash--action-button`}
+    className={bem`theme-splash`.elem`action-button`}
     {...baseProps}
   >
     {children}

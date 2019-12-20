@@ -1,0 +1,29 @@
+@import "./common.scss";
+
+.theme-button {
+  background-color: var(--theme-primary);
+  @extend %button-base;
+  color: var(--theme-text-on-primary);
+  position: relative;
+  border: 2px outset var(--theme-primary);
+
+  &:active {
+    border-style: inset;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    @extend %button-base;
+  }
+
+  &:hover {
+    &::before {
+      background: rgba(255, 255, 255, 0.4);
+    }
+  }
+}

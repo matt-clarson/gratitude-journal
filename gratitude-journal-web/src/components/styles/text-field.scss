@@ -1,0 +1,23 @@
+.theme-text-field {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: 2vh;
+
+  .theme-text-field__input {
+    font-size: 1rem;
+    padding: 0.5vh 0.5vw 0.5vh 1vw;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  .theme-text-field__char-count {
+    text-align: end;
+    display: none;
+  }
+
+  &:focus-within {
+    .theme-text-field__char-count {
+      display: inline;
+    }
+  }
+}

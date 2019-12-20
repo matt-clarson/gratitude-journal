@@ -15,53 +15,53 @@
   height: 100vh;
   padding-top: 25vh;
 
-  &.theme-splash__left {
+  &.theme-splash--left {
     align-items: flex-start;
   }
 
-  &.theme-splash__right {
+  &.theme-splash--right {
     align-items: flex-end;
   }
 
-  &.theme-splash__centre {
+  &.theme-splash--centre {
     align-items: center;
   }
 
-  .theme-splash--title {
+  .theme-splash__title {
     display: flex;
     flex-flow: column nowrap;
     flex-grow: 2;
 
-    .theme-splash--title-header {
+    .theme-splash__title-header {
       font-size: 4rem;
       margin-top: 0;
       margin-bottom: 2vh;
     }
 
-    .theme-splash--title-sub-header {
+    .theme-splash__title-sub-header {
       font-size: 1.3rem;
       margin: 0;
 
-      &.theme-splash--title-sub-header__right {
+      &.theme-splash__title-sub-header--right {
         align-self: end;
       }
     }
   }
-  .theme-splash--actions {
+  .theme-splash__actions {
     flex-grow: 1;
-    &.theme-splash--actions__left {
+    &.theme-splash__actions--left {
       align-self: flex-start;
     }
 
-    &.theme-splash--actions__right {
+    &.theme-splash__actions--right {
       align-self: flex-end;
     }
 
-    &.theme-splash--actions__centre {
+    &.theme-splash__actions--centre {
       align-self: center;
     }
 
-    .theme-splash--action-button {
+    .theme-splash__action-button {
       @extend %button-base;
       @extend %transparent-button;
       border: 2px solid var(--theme-text-on-primary);

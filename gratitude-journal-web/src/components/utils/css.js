@@ -8,11 +8,11 @@ export const bem = (...blockArgs) =>
     name: parse(...blockArgs),
     elem: (...elemArgs) =>
       stringify({
-        name: `${parse(...blockArgs)}--${parse(...elemArgs)}`,
+        name: `${parse(...blockArgs)}__${parse(...elemArgs)}`,
         mod: (...modArgs) =>
-          `${parse(...blockArgs)}--${parse(...elemArgs)}__${parse(...modArgs)}`
+          `${parse(...blockArgs)}__${parse(...elemArgs)}--${parse(...modArgs)}`
       }),
-    mod: (...modArgs) => `${parse(...blockArgs)}__${parse(...modArgs)}`
+    mod: (...modArgs) => `${parse(...blockArgs)}--${parse(...modArgs)}`
   });
 
 export const classes = (...cssClasses) => cssClasses.join(" ");

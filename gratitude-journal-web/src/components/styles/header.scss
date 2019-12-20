@@ -9,7 +9,7 @@
 
   padding: 1vh 2vw;
 
-  .theme-header--title {
+  .theme-header__title {
     margin: 0;
     flex-grow: 1;
 
@@ -17,18 +17,18 @@
       margin-left: 1vw;
     }
 
-    .theme-header--title-content {
+    .theme-header__title-content {
       color: inherit;
     }
   }
 
-  .theme-header--actions {
+  .theme-header__actions {
     display: flex;
     flex-flow: row wrap;
     max-width: 35%;
   }
 
-  .theme-header--action-button {
+  .theme-header__action-button {
     @extend %button-base;
     @extend %transparent-button;
   }
