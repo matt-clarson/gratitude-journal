@@ -9,7 +9,7 @@ const HeaderTitle = ({ children, ...baseProps }) => (
   <h1 className={bem`theme-header`.elem`title`}>
     <ComponentFactory
       defaultTag="span"
-      className={bem`theme-header`.elem`title-content`}
+      fixedClassName={bem`theme-header`.elem`title-content`}
       {...baseProps}
     >
       {children}

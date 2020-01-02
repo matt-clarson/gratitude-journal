@@ -11,7 +11,7 @@ const Button = ({ type, onClick, children, ...baseProps }) => {
     <ComponentFactory
       onClick={onClick ?? (() => {})}
       defaultTag="button"
-      className={css}
+      fixedClassName={css}
       type={type}
       {...baseProps}
     >

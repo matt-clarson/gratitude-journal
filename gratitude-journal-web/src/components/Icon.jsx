@@ -6,7 +6,7 @@ import { bem } from "./utils/css";
 import "./styles/icons.scss";
 
 const Icon = ({ icon, ...baseProps }) => (
-  <ComponentFactory defaultTag="i" className={bem`material-icons`}>
+  <ComponentFactory defaultTag="i" fixedClassName={bem`material-icons`}>
     {icon}
   </ComponentFactory>
 );

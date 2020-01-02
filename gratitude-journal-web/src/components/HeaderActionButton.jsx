@@ -9,7 +9,7 @@ import "./styles/header.scss";
 const HeaderActionButton = ({ onClick, children, icon, ...baseProps }) => (
   <ComponentFactory
     defaultTag="button"
-    className={bem`theme-header`.elem`action-button`}
+    fixedClassName={bem`theme-header`.elem`action-button`}
     onClick={onClick}
     {...baseProps}
   >

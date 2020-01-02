@@ -1,6 +1,7 @@
 @import "./common.scss";
 
 .theme-splash {
+  $self: &;
   @include primary-background;
   display: flex;
   flex-flow: column;
@@ -15,53 +16,54 @@
   height: 100vh;
   padding-top: 25vh;
 
-  &.theme-splash--left {
+  &--left {
     align-items: flex-start;
   }
 
-  &.theme-splash--right {
+  &--right {
     align-items: flex-end;
   }
 
-  &.theme-splash--centre {
+  &--centre {
     align-items: center;
   }
 
-  .theme-splash__title {
+  &__title {
     display: flex;
     flex-flow: column nowrap;
     flex-grow: 2;
 
-    .theme-splash__title-header {
+    #{$self}__title-header {
       font-size: 4rem;
       margin-top: 0;
       margin-bottom: 2vh;
     }
 
-    .theme-splash__title-sub-header {
+    #{$self}__title-sub-header {
       font-size: 1.3rem;
       margin: 0;
 
-      &.theme-splash__title-sub-header--right {
+      &--right {
         align-self: end;
       }
     }
   }
-  .theme-splash__actions {
+
+  #{$self}__actions {
     flex-grow: 1;
-    &.theme-splash__actions--left {
+    &--left {
       align-self: flex-start;
     }
 
-    &.theme-splash__actions--right {
+    &--right {
       align-self: flex-end;
     }
 
-    &.theme-splash__actions--centre {
+    &--centre {
       align-self: center;
     }
 
-    .theme-splash__action-button {
+    #{$self}__action-button {
       @extend %button-base;
       @extend %transparent-button;
       border: 2px solid var(--theme-text-on-primary);

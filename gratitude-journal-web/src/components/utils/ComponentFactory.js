@@ -1,6 +1,18 @@
 import React from "react";
+import { classes } from "./css";
 
-export default ({ defaultTag, tag, children, ...props }) => {
+export default ({
+  fixedClassName,
+  className,
+  defaultTag,
+  tag,
+  children,
+  ...props
+}) => {
   const Tag = tag || defaultTag;
-  return <Tag {...props}>{children}</Tag>;
+  return (
+    <Tag className={classes(fixedClassName, className)} {...props}>
+      {children}
+    </Tag>
+  );
 };

@@ -8,7 +8,7 @@ import "./styles/header.scss";
 const Header = ({ children, ...baseProps }) => (
   <ComponentFactory
     defaultTag="header"
-    className={bem`theme-header`}
+    fixedClassName={bem`theme-header`}
     {...baseProps}
   >
     {children}

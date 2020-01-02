@@ -8,7 +8,7 @@ import "./styles/splash.scss";
 const SplashTitleHeader = ({ children, ...baseProps }) => (
   <ComponentFactory
     defaultTag="h1"
-    className={bem`theme-splash`.elem`title-header`}
+    fixedClassName={bem`theme-splash`.elem`title-header`}
     {...baseProps}
   >
     {children}

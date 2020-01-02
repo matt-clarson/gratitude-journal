@@ -14,7 +14,7 @@ const SplashTitleSubHeader = ({
   return (
     <ComponentFactory
       defaultTag="p"
-      className={classes(css, css.mod`${position}`)}
+      fixedClassName={classes(css, css.mod`${position}`)}
       {...baseProps}
     >
       {children}

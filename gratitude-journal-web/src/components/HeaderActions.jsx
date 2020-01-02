@@ -8,7 +8,7 @@ import "./styles/header.scss";
 const HeaderActions = ({ children }) => (
   <ComponentFactory
     defaultTag="div"
-    className={bem`theme-header`.elem`actions`}
+    fixedClassName={bem`theme-header`.elem`actions`}
   >
     {children}
   </ComponentFactory>

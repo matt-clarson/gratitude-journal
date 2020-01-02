@@ -10,7 +10,7 @@ const SplashActions = ({ position = "default", children, ...baseProps }) => {
   return (
     <ComponentFactory
       defaultTag="nav"
-      className={classes(css, css.mod`${position}`)}
+      fixedClassName={classes(css, css.mod`${position}`)}
       {...baseProps}
     >
       {children}

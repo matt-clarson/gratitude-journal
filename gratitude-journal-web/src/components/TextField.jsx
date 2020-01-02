@@ -27,7 +27,7 @@ const TextField = ({
   return (
     <ComponentFactory
       style={{ width }}
-      className={css}
+      fixedClassName={css}
       defaultTag="div"
       {...baseProps}
     >

@@ -1,0 +1,30 @@
+.theme-joined-content {
+  $self: &;
+  display: flex;
+  flex-flow: row nowrap;
+  background: rgb(220, 220, 220);
+  max-width: 1024px;
+
+  &__raised-wrapper {
+    position: relative;
+    flex-grow: 1;
+  }
+
+  &__base {
+    flex-basis: 50%;
+  }
+
+  .theme-section--flat#{$self}__base {
+    border: none;
+    border-radius: 0px;
+  }
+
+  &__raised {
+    position: absolute;
+    top: -20px;
+    right: 10%;
+    bottom: -20px;
+    left: 2%;
+    background: white;
+  }
+}

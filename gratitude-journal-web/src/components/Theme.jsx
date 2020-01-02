@@ -10,7 +10,12 @@ const Theme = ({ colours, children, ...baseProps }) => {
     {}
   );
   return (
-    <ComponentFactory defaultTag="span" style={processedColours} {...baseProps}>
+    <ComponentFactory
+      fixedClassName="theme-theme-root"
+      defaultTag="span"
+      style={processedColours}
+      {...baseProps}
+    >
       {children}
     </ComponentFactory>
   );

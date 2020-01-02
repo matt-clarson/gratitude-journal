@@ -11,7 +11,7 @@ const Splash = ({ children, position = "default", ...baseProps }) => {
   return (
     <ComponentFactory
       defaultTag="dialog"
-      className={classes(css, css.mod`${position}`)}
+      fixedClassName={classes(css, css.mod`${position}`)}
       {...baseProps}
     >
       {children}
