@@ -29,6 +29,7 @@ const LogIn = () => {
         </JoinedContentBase>
         <JoinedContentRaised isForm>
           <FormContent>
+            <h3>{"Please enter your username and password"}</h3>
             <TextField
               label="Username"
               value={username}
