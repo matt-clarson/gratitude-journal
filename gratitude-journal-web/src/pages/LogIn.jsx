@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import JoinedContent from "../components/JoinedContent";
 import JoinedContentBase from "../components/JoinedContentBase";
 import JoinedContentRaised from "../components/JoinedContentRaised";
+import FormContent from "../components/FormContent";
+import FormActions from "../components/FormActions";
 import TextField from "../components/TextField";
 import Button from "../components/Button";
 
@@ -25,25 +27,29 @@ const LogIn = () => {
           </p>
           <Password height={200} width={300} />
         </JoinedContentBase>
-        <JoinedContentRaised tag="form">
-          <TextField
-            label="Username"
-            value={username}
-            onChange={({ target: { value } }) => setUsername(value)}
-            required
-            minLength={5}
-            maxLength={32}
-          />
+        <JoinedContentRaised isForm>
+          <FormContent>
+            <TextField
+              label="Username"
+              value={username}
+              onChange={({ target: { value } }) => setUsername(value)}
+              required
+              minLength={5}
+              maxLength={32}
+            />
 
-          <TextField
-            label="Password"
-            value={password}
-            onChange={({ target: { value } }) => setPassword(value)}
-            type="password"
-            required
-          />
+            <TextField
+              label="Password"
+              value={password}
+              onChange={({ target: { value } }) => setPassword(value)}
+              type="password"
+              required
+            />
+          </FormContent>
 
-          <Button>{"Log In"}</Button>
+          <FormActions>
+            <Button>{"Log In"}</Button>
+          </FormActions>
         </JoinedContentRaised>
       </JoinedContent>
     </div>
