@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useMutation } from "urql";
+import { useLocation, useHistory } from "react-router-dom";
+import { User } from "../context/User";
 import JoinedContent from "../components/JoinedContent";
 import JoinedContentBase from "../components/JoinedContentBase";
 import JoinedContentRaised from "../components/JoinedContentRaised";
@@ -11,13 +14,32 @@ import Button from "../components/Button";
 import { ReactComponent as Password } from "../static/password.svg";
 import "./styles/log-in.scss";
 
+const LOGIN = `
+  mutation Login($username: String!, $password: String!) {
+    tokenAuth(username: $username, password: $password) {
+      token
+    }
+  }
+`;
+
 const LogIn = () => {
+  const location = useLocation();
+  const history = useHistory();
+  const { setUser } = useContext(User);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginResponse, executeLogin] = useMutation(LOGIN);
   const onSubmit = event => {
     event.preventDefault();
-    console.log({ username, password });
+    executeLogin({ username, password });
   };
+  useEffect(() => {
+    const token = loginResponse.data?.tokenAuth?.token;
+    if (token) {
+      setUser({ authorised: true, token });
+      history.push(location.state?.from ?? "/");
+    }
+  });
   return (
     <div className="gj-login">
       <JoinedContent>
@@ -32,6 +54,9 @@ const LogIn = () => {
           <Password height={200} width={300} />
         </JoinedContentBase>
         <JoinedContentRaised isForm onSubmit={onSubmit}>
+          {loginResponse.error?.graphQLErrors.length > 0 && (
+            <h4>{"Username or password is invalid"}</h4>
+          )}
           <FormContent>
             <h3>{"Please enter your username and password"}</h3>
             <TextField
@@ -55,7 +80,7 @@ const LogIn = () => {
           </FormContent>
 
           <FormActions>
-            <Button>{"Log In"}</Button>
+            <Button disabled={loginResponse.fetching}>{"Log In"}</Button>
           </FormActions>
         </JoinedContentRaised>
       </JoinedContent>

@@ -11,7 +11,7 @@ const SplashActionButton = ({ children, onClick, ...baseProps }) => {
     <ComponentFactory
       defaultTag="button"
       fixedClassName={baseCss.elem`action-button`}
-      {...baseProps}
+      {...{ ...baseProps, onClick }}
     >
       {children}
     </ComponentFactory>
@@ -20,7 +20,7 @@ const SplashActionButton = ({ children, onClick, ...baseProps }) => {
 
 SplashActionButton.propTypes = {
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func
 };
 
 export default SplashActionButton;

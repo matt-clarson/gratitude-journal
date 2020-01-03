@@ -5,29 +5,34 @@ import HeaderTitle from "./components/HeaderTitle";
 import HeaderActions from "./components/HeaderActions";
 import HeaderActionButton from "./components/HeaderActionButton";
 import Routes from "./Routes";
-import { User } from "./context/User";
+import UserProvider from "./context/User";
+import GraphQLClient from "./context/GraphQLClient";
+
+const BASE_URL = process.env.GJ_APP_API;
 
 function GratitudeJournal() {
   return (
     <div className="gj-app">
-      <User.Provider value={{ authorised: false }}>
-        <Header>
-          <HeaderTitle tag={Link} to="/">
-            {"Gratitude Journal"}
-          </HeaderTitle>
+      <UserProvider>
+        <GraphQLClient baseUrl={BASE_URL}>
+          <Header>
+            <HeaderTitle tag={Link} to="/">
+              {"Gratitude Journal"}
+            </HeaderTitle>
 
-          <HeaderActions>
-            <HeaderActionButton
-              icon={"account_circle"}
-              onClick={() => console.log("account info")}
-            />
-          </HeaderActions>
-        </Header>
+            <HeaderActions>
+              <HeaderActionButton
+                icon={"account_circle"}
+                onClick={() => console.log("account info")}
+              />
+            </HeaderActions>
+          </Header>
 
-        <main>
-          <Routes />
-        </main>
-      </User.Provider>
+          <main>
+            <Routes />
+          </main>
+        </GraphQLClient>
+      </UserProvider>
     </div>
   );
 }

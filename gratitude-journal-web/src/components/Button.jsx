@@ -5,14 +5,15 @@ import { bem } from "./utils/css";
 
 import "./styles/button.scss";
 
-const Button = ({ type, onClick, children, ...baseProps }) => {
+const Button = ({ type, disabled, onClick, children, ...baseProps }) => {
   const css = bem`rdp-button`;
   return (
     <ComponentFactory
       onClick={onClick ?? (() => {})}
       defaultTag="button"
-      fixedClassName={css}
+      fixedClassName={disabled ? css.mod`disabled` : css}
       type={type}
+      disabled={disabled}
       {...baseProps}
     >
       {children}
@@ -22,7 +23,8 @@ const Button = ({ type, onClick, children, ...baseProps }) => {
 
 Button.propTypes = {
   onClick: PropTypes.func,
-  children: PropTypes.node
+  children: PropTypes.node,
+  disabled: PropTypes.bool
 };
 
 export default Button;

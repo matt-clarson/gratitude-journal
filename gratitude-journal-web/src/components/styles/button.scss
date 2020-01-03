@@ -1,6 +1,7 @@
 @import "./common.scss";
 
 .rdp-button {
+  $self: &;
   background-color: var(--rdp-theme-primary);
   @extend %button-base;
   color: var(--rdp-theme-text-on-primary);
@@ -24,6 +25,23 @@
   &:hover {
     &::before {
       background: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  &--disabled {
+    @extend #{$self};
+    background-color: rgb(200, 200, 200);
+    border-color: rgb(160, 160, 160);
+    border-style: inset;
+
+    &::before {
+      cursor: auto;
+    }
+
+    &:hover {
+      &::before {
+        background: rgba(255, 255, 255, 0);
+      }
     }
   }
 }

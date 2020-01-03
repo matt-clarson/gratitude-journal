@@ -5,12 +5,12 @@ import LogIn from "./pages/LogIn";
 import { User } from "./context/User";
 
 const AuthRoute = ({ children, ...props }) => {
-  const { authorised } = useContext(User);
+  const { user } = useContext(User);
   return (
     <Route
       {...props}
       render={({ location }) =>
-        authorised ? (
+        user.authorised ? (
           children
         ) : (
           <Redirect to={{ pathname: "/welcome", state: { from: location } }} />
