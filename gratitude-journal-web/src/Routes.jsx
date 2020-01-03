@@ -1,13 +1,30 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import LogIn from "./pages/LogIn";
+import { User } from "./context/User";
+
+const AuthRoute = ({ children, ...props }) => {
+  const { authorised } = useContext(User);
+  return (
+    <Route
+      {...props}
+      render={({ location }) =>
+        authorised ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: "/welcome", state: { from: location } }} />
+        )
+      }
+    />
+  );
+};
 
 export default () => (
   <Switch>
-    <Route path="/" exact>
+    <AuthRoute path="/" exact>
       <p>{"Homepage"}</p>
-    </Route>
+    </AuthRoute>
 
     <Route path="/welcome">
       <Welcome />
