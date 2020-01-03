@@ -5,16 +5,11 @@ import Section from "./Section";
 
 import "./styles/form.scss";
 
-const handleSubmit = event => {
-  event.preventDefault();
-  console.log(event.nativeEvent.target?.elements);
-};
-
-const Form = ({ children, ...baseProps }) => {
+const Form = ({ onSubmit, children, ...baseProps }) => {
   const css = bem`theme-form`;
   return (
     <Section
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
       {...{
         ...baseProps,
         className: classes(css, baseProps.className),
@@ -27,6 +22,7 @@ const Form = ({ children, ...baseProps }) => {
 };
 
 Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired
 };
 

@@ -8,6 +8,7 @@ import "./styles/text-field.scss";
 
 const TextField = ({
   width = 200,
+  name,
   label,
   value,
   onChange,
@@ -38,6 +39,7 @@ const TextField = ({
         className={css.elem`input`}
         aria-labelledby={id.current}
         {...{
+          name,
           type,
           pattern,
           minLength,
@@ -58,6 +60,7 @@ const TextField = ({
 };
 
 TextField.propTypes = {
+  name: PropTypes.string.isRequired,
   label: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

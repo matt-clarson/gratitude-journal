@@ -15,7 +15,10 @@ function GratitudeJournal() {
         </HeaderTitle>
 
         <HeaderActions>
-          <HeaderActionButton icon={"account_circle"} />
+          <HeaderActionButton
+            icon={"account_circle"}
+            onClick={() => console.log("account info")}
+          />
         </HeaderActions>
       </Header>
 

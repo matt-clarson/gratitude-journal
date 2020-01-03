@@ -14,6 +14,10 @@ import "./styles/log-in.scss";
 const LogIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const onSubmit = event => {
+    event.preventDefault();
+    console.log({ username, password });
+  };
   return (
     <div className="gj-login">
       <JoinedContent>
@@ -22,15 +26,16 @@ const LogIn = () => {
             {
               "Log in using your details. Or, if you don't already have an account, "
             }
-            <Link to="sign-up">{"click here to sign up"}</Link>
+            <Link to="/sign-up">{"click here to sign up"}</Link>
             {"."}
           </p>
           <Password height={200} width={300} />
         </JoinedContentBase>
-        <JoinedContentRaised isForm>
+        <JoinedContentRaised isForm onSubmit={onSubmit}>
           <FormContent>
             <h3>{"Please enter your username and password"}</h3>
             <TextField
+              name="username"
               label="Username"
               value={username}
               onChange={({ target: { value } }) => setUsername(value)}
@@ -40,6 +45,7 @@ const LogIn = () => {
             />
 
             <TextField
+              name="password"
               label="Password"
               value={password}
               onChange={({ target: { value } }) => setPassword(value)}
