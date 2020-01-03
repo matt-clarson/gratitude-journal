@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import ComponentFactory from "./utils/ComponentFactory";
-import { bem, classes } from "./utils/css";
+import { classes } from "./utils/css";
+import { SplashCSS } from "./Splash";
 
 import "./styles/splash.scss";
 
@@ -10,7 +11,8 @@ const SplashTitleSubHeader = ({
   position = "default",
   ...baseProps
 }) => {
-  const css = bem`theme-splash`.elem`title-sub-header`;
+  const baseCss = useContext(SplashCSS);
+  const css = baseCss.elem`title-sub-header`;
   return (
     <ComponentFactory
       defaultTag="p"

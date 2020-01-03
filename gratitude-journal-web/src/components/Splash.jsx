@@ -1,21 +1,25 @@
-import React from "react";
+import React, { createContext } from "react";
 import PropTypes from "prop-types";
 import ComponentFactory from "./utils/ComponentFactory";
 import { bem, classes } from "./utils/css";
 
 import "./styles/splash.scss";
 
+export const SplashCSS = createContext();
+
 const Splash = ({ children, position = "default", ...baseProps }) => {
-  const css = bem`theme-splash`;
+  const css = bem`rdp-splash`;
   if (!baseProps.tag) baseProps.open = true;
   return (
-    <ComponentFactory
-      defaultTag="dialog"
-      fixedClassName={classes(css, css.mod`${position}`)}
-      {...baseProps}
-    >
-      {children}
-    </ComponentFactory>
+    <SplashCSS.Provider value={css}>
+      <ComponentFactory
+        defaultTag="dialog"
+        fixedClassName={classes(css, css.mod`${position}`)}
+        {...baseProps}
+      >
+        {children}
+      </ComponentFactory>
+    </SplashCSS.Provider>
   );
 };
 

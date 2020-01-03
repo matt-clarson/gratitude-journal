@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import ComponentFactory from "./utils/ComponentFactory";
-import { bem } from "./utils/css";
+import { HeaderCSS } from "./Header";
 
 import "./styles/header.scss";
 
-const HeaderActions = ({ children }) => (
-  <ComponentFactory
-    defaultTag="div"
-    fixedClassName={bem`theme-header`.elem`actions`}
-  >
-    {children}
-  </ComponentFactory>
-);
+const HeaderActions = ({ children }) => {
+  const baseCss = useContext(HeaderCSS);
+  return (
+    <ComponentFactory defaultTag="div" fixedClassName={baseCss.elem`actions`}>
+      {children}
+    </ComponentFactory>
+  );
+};
 
 HeaderActions.propTypes = {
   children: PropTypes.node.isRequired

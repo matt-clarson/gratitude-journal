@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import ComponentFactory from "./utils/ComponentFactory";
-import { bem } from "./utils/css";
+import { SplashCSS } from "./Splash";
 
 import "./styles/splash.scss";
 
-const SplashTitle = ({ children, ...baseProps }) => (
-  <ComponentFactory
-    defaultTag="header"
-    fixedClassName={bem`theme-splash`.elem`title`}
-    {...baseProps}
-  >
-    {children}
-  </ComponentFactory>
-);
+const SplashTitle = ({ children, ...baseProps }) => {
+  const baseCss = useContext(SplashCSS);
+  return (
+    <ComponentFactory
+      defaultTag="header"
+      fixedClassName={baseCss.elem`title`}
+      {...baseProps}
+    >
+      {children}
+    </ComponentFactory>
+  );
+};
 
 SplashTitle.propTypes = {
   children: PropTypes.node.isRequired,

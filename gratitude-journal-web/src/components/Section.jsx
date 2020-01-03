@@ -6,7 +6,7 @@ import { bem } from "./utils/css";
 import "./styles/section.scss";
 
 const Section = ({ flat, children, ...baseProps }) => {
-  const css = bem`theme-section`;
+  const css = bem`rdp-section`;
   return (
     <ComponentFactory
       defaultTag="section"

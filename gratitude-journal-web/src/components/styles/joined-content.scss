@@ -1,4 +1,4 @@
-.theme-joined-content {
+.rdp-joined-content {
   $self: &;
   display: flex;
   flex-flow: row nowrap;
@@ -14,7 +14,7 @@
     flex-basis: 50%;
   }
 
-  .theme-section--flat#{$self}__base {
+  .rdp-section--flat#{$self}__base {
     border: none;
     border-radius: 0px;
   }

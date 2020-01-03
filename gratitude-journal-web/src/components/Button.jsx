@@ -6,7 +6,7 @@ import { bem } from "./utils/css";
 import "./styles/button.scss";
 
 const Button = ({ type, onClick, children, ...baseProps }) => {
-  const css = bem`theme-button`;
+  const css = bem`rdp-button`;
   return (
     <ComponentFactory
       onClick={onClick ?? (() => {})}

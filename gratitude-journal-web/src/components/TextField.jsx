@@ -20,7 +20,7 @@ const TextField = ({
   maxLength,
   ...baseProps
 }) => {
-  const css = bem`theme-text-field`;
+  const css = bem`rdp-text-field`;
   const id = useRef(null);
   if (!id.current) {
     id.current = nanoid();

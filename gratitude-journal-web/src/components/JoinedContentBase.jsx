@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { bem } from "./utils/css";
+import { JoinedContentCSS } from "./JoinedContent";
 import Section from "./Section";
 
 import "./styles/joined-content.scss";
 
 const JoinContentBase = ({ title, children, ...baseProps }) => {
-  const baseCss = bem`theme-joined-content`;
-  const css = baseCss.elem`base`;
+  const baseCss = useContext(JoinedContentCSS);
   return (
     <Section
       flat
-      className={css}
+      className={baseCss.elem`base`}
       {...{ ...baseProps, tag: baseProps.tag ?? "div" }}
     >
       <h2 className={baseCss.elem`title`}>{title}</h2>

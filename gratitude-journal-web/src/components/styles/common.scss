@@ -1,11 +1,11 @@
 @mixin primary-background {
-  background: var(--theme-primary);
+  background: var(--rdp-theme-primary);
   background: linear-gradient(
     45deg,
-    var(--theme-primary),
-    var(--theme-primary-gradient)
+    var(--rdp-theme-primary),
+    var(--rdp-theme-primary-gradient)
   );
-  color: var(--theme-text-on-primary);
+  color: var(--rdp-theme-text-on-primary);
 }
 
 %button-base {

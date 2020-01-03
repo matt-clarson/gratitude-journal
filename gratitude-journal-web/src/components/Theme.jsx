@@ -2,7 +2,7 @@ import React from "react";
 import kebabCase from "lodash/kebabCase";
 import ComponentFactory from "./utils/ComponentFactory";
 
-const toCSSVariable = name => `--theme-${kebabCase(name)}`;
+const toCSSVariable = name => `--rdp-theme-${kebabCase(name)}`;
 
 const Theme = ({ colours, children, ...baseProps }) => {
   const processedColours = Object.entries(colours).reduce(
@@ -11,7 +11,7 @@ const Theme = ({ colours, children, ...baseProps }) => {
   );
   return (
     <ComponentFactory
-      fixedClassName="theme-theme-root"
+      fixedClassName="rdp-theme-root"
       defaultTag="span"
       style={processedColours}
       {...baseProps}

@@ -1,11 +1,11 @@
 @import "./common.scss";
 
-.theme-button {
-  background-color: var(--theme-primary);
+.rdp-button {
+  background-color: var(--rdp-theme-primary);
   @extend %button-base;
-  color: var(--theme-text-on-primary);
+  color: var(--rdp-theme-text-on-primary);
   position: relative;
-  border: 2px outset var(--theme-primary);
+  border: 2px outset var(--rdp-theme-primary);
 
   &:active {
     border-style: inset;
