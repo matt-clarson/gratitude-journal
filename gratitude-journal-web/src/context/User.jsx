@@ -10,7 +10,6 @@ export const User = createContext({
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(NO_AUTH_FALLBACK);
-  console.log(user);
   return <User.Provider value={{ user, setUser }}>{children}</User.Provider>;
 };
 

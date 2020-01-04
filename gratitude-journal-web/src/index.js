@@ -13,7 +13,8 @@ const App = () => (
         primary: "#0083b0",
         primaryGradient: "#00b4db",
         textOnPrimary: "#ffffff",
-        textOnSurface: "#000000"
+        textOnSurface: "#000000",
+        error: "red"
       }}
     >
       <GratitudeJournal />

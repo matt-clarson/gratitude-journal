@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 import { useLocation, useHistory } from "react-router-dom";
 import { User } from "../context/User";
+import ErrorDisplay from "../components/ErrorDisplay";
 import JoinedContent from "../components/JoinedContent";
 import JoinedContentBase from "../components/JoinedContentBase";
 import JoinedContentRaised from "../components/JoinedContentRaised";
@@ -57,6 +58,9 @@ const LogIn = () => {
           {loginResponse.error?.graphQLErrors.length > 0 && (
             <h4>{"Username or password is invalid"}</h4>
           )}
+          <ErrorDisplay
+            error={[{ message: "error1" }, { message: "error2" }]}
+          />
           <FormContent>
             <h3>{"Please enter your username and password"}</h3>
             <TextField
