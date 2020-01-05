@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Welcome from "./pages/Welcome";
+import Welcome from "./Welcome";
 import LogIn from "./LogIn";
 import { User } from "./context/User";
 
