@@ -6,22 +6,37 @@ import Section from "./Section";
 import "./styles/form.scss";
 
 export const FormCSS = createContext();
+export const FormContext = createContext({ autoControlled: false });
 
-const Form = ({ onSubmit, children, ...baseProps }) => {
+const autoSubmit = (onSubmit, event) => {
+  event.preventDefault();
+  const { elements } = event.target;
+  const formData = {};
+  for (const element of elements) {
+    if (element.tagName === "BUTTON") continue;
+    const { name, value } = element;
+    formData[name] = value;
+  }
+  onSubmit(formData);
+};
+
+const Form = ({ autoControlled, onSubmit, children, ...baseProps }) => {
   const css = bem`rdp-form`;
   return (
-    <FormCSS.Provider value={css}>
-      <Section
-        onSubmit={onSubmit}
-        {...{
-          ...baseProps,
-          className: classes(css, baseProps.className),
-          tag: "form"
-        }}
-      >
-        {children}
-      </Section>
-    </FormCSS.Provider>
+    <FormContext.Provider value={{ autoControlled }}>
+      <FormCSS.Provider value={css}>
+        <Section
+          onSubmit={autoControlled ? autoSubmit.bind(null, onSubmit) : onSubmit}
+          {...{
+            ...baseProps,
+            className: classes(css, baseProps.className),
+            tag: "form"
+          }}
+        >
+          {children}
+        </Section>
+      </FormCSS.Provider>
+    </FormContext.Provider>
   );
 };
 

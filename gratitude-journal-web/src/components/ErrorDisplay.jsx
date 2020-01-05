@@ -45,7 +45,7 @@ ErrorDisplay.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
     errorShape,
     PropTypes.arrayOf(errorShape)
-  ]).isRequired
+  ])
 };
 
 export default ErrorDisplay;

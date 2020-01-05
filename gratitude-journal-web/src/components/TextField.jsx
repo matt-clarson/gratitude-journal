@@ -1,10 +1,20 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import nanoid from "nanoid";
 import ComponentFactory from "./utils/ComponentFactory";
 import { bem } from "./utils/css";
+import { FormContext } from "./Form";
 
 import "./styles/text-field.scss";
+
+const useAutoControlledInput = () => {
+  const inputRef = useRef(null);
+  const [value, setValue] = useState("");
+  const onChange = () => {
+    setValue(inputRef.current.value);
+  };
+  return { inputRef, value, onChange };
+};
 
 const TextField = ({
   width = 200,
@@ -21,6 +31,8 @@ const TextField = ({
   ...baseProps
 }) => {
   const css = bem`rdp-text-field`;
+  const { autoControlled } = useContext(FormContext);
+  const { inputRef, ...auto } = useAutoControlledInput();
   const id = useRef(null);
   if (!id.current) {
     id.current = nanoid();
@@ -38,6 +50,7 @@ const TextField = ({
       <input
         className={css.elem`input`}
         aria-labelledby={id.current}
+        ref={inputRef}
         {...{
           name,
           type,
@@ -45,25 +58,24 @@ const TextField = ({
           minLength,
           maxLength,
           value,
-          onChange,
+          onChange: autoControlled ? auto.onChange : onChange,
           required,
           title: title ?? `${label} ${pattern ?? ""}`
         }}
       />
       {maxLength && (
-        <span
-          className={css.elem`char-count`}
-        >{`${value.length}/${maxLength}`}</span>
+        <span className={css.elem`char-count`}>{`${value?.length ??
+          auto.value.length}/${maxLength}`}</span>
       )}
     </ComponentFactory>
   );
 };
 
 TextField.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   label: PropTypes.node.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
   type: PropTypes.string,
   required: PropTypes.bool,
   title: PropTypes.string,

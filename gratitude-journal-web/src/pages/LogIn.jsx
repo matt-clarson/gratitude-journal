@@ -27,13 +27,7 @@ const LogIn = () => {
   const location = useLocation();
   const history = useHistory();
   const { setUser } = useContext(User);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [loginResponse, executeLogin] = useMutation(LOGIN);
-  const onSubmit = event => {
-    event.preventDefault();
-    executeLogin({ username, password });
-  };
   useEffect(() => {
     const token = loginResponse.data?.tokenAuth?.token;
     if (token) {
@@ -54,14 +48,12 @@ const LogIn = () => {
           </p>
           <Password height={200} width={300} />
         </JoinedContentBase>
-        <JoinedContentRaised isForm onSubmit={onSubmit}>
+        <JoinedContentRaised isForm autoControlled onSubmit={executeLogin}>
           <FormContent>
             <h3>{"Please enter your username and password"}</h3>
             <TextField
               name="username"
               label="Username"
-              value={username}
-              onChange={({ target: { value } }) => setUsername(value)}
               required
               minLength={5}
               maxLength={32}
@@ -70,8 +62,6 @@ const LogIn = () => {
             <TextField
               name="password"
               label="Password"
-              value={password}
-              onChange={({ target: { value } }) => setPassword(value)}
               type="password"
               required
             />
