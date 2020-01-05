@@ -1,4 +1,13 @@
 .rdp-error {
   $self: &;
   color: var(--rdp-theme-error);
+
+  &__message-lead {
+    display: inline-flex;
+    align-items: center;
+
+    #{$self}__message-icon {
+      margin-right: 5px;
+    }
+  }
 }

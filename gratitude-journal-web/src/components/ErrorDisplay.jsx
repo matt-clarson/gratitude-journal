@@ -2,6 +2,7 @@ import React from "react";
 import { isElement } from "react-is";
 import PropTypes from "prop-types";
 import ComponentFactory from "./utils/ComponentFactory";
+import Icon from "./Icon";
 import { bem } from "./utils/css";
 
 import "./styles/error.scss";
@@ -21,7 +22,16 @@ const ErrorDisplay = ({ error, ...baseProps }) => {
   const css = bem`rdp-error`;
   return (
     <ComponentFactory defaultTag="div" fixedClassName={css} {...baseProps}>
-      {processError(error)}
+      {error && (
+        <span className={css.elem`message`}>
+          <span className={css.elem`message-lead`}>
+            <Icon className={css.elem`message-icon`} icon="error" />
+            Error
+          </span>
+          <br />
+          {processError(error)}
+        </span>
+      )}
     </ComponentFactory>
   );
 };

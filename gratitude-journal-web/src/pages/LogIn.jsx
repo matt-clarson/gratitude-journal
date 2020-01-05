@@ -55,12 +55,6 @@ const LogIn = () => {
           <Password height={200} width={300} />
         </JoinedContentBase>
         <JoinedContentRaised isForm onSubmit={onSubmit}>
-          {loginResponse.error?.graphQLErrors.length > 0 && (
-            <h4>{"Username or password is invalid"}</h4>
-          )}
-          <ErrorDisplay
-            error={[{ message: "error1" }, { message: "error2" }]}
-          />
           <FormContent>
             <h3>{"Please enter your username and password"}</h3>
             <TextField
@@ -82,7 +76,10 @@ const LogIn = () => {
               required
             />
           </FormContent>
-
+          <FormContent
+            tag={ErrorDisplay}
+            error={loginResponse.error?.graphQLErrors}
+          ></FormContent>
           <FormActions>
             <Button disabled={loginResponse.fetching}>{"Log In"}</Button>
           </FormActions>
