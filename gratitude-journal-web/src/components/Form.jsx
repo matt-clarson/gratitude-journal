@@ -2,6 +2,7 @@ import React, { createContext } from "react";
 import PropTypes from "prop-types";
 import { bem, classes } from "./utils/css";
 import Section from "./Section";
+import Spinner from "./Spinner";
 
 import "./styles/form.scss";
 
@@ -20,7 +21,13 @@ const autoSubmit = (onSubmit, event) => {
   onSubmit(formData);
 };
 
-const Form = ({ autoControlled, onSubmit, children, ...baseProps }) => {
+const Form = ({
+  submitting,
+  autoControlled,
+  onSubmit,
+  children,
+  ...baseProps
+}) => {
   const css = bem`rdp-form`;
   return (
     <FormContext.Provider value={{ autoControlled }}>
@@ -33,6 +40,13 @@ const Form = ({ autoControlled, onSubmit, children, ...baseProps }) => {
             tag: "form"
           }}
         >
+          {submitting && (
+            <Spinner
+              size="m"
+              message="Submitting..."
+              className={css.elem`spinner`}
+            />
+          )}
           {children}
         </Section>
       </FormCSS.Provider>
@@ -41,6 +55,8 @@ const Form = ({ autoControlled, onSubmit, children, ...baseProps }) => {
 };
 
 Form.propTypes = {
+  autoControlled: PropTypes.bool,
+  submittting: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired
 };

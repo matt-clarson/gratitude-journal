@@ -8,7 +8,12 @@ import JoinedContentRaised from "../components/JoinedContentRaised";
 import TextField from "../components/TextField";
 
 const LogInForm = ({ executeLogin, loginResponse }) => (
-  <JoinedContentRaised isForm autoControlled onSubmit={executeLogin}>
+  <JoinedContentRaised
+    submitting={loginResponse.fetching}
+    isForm
+    autoControlled
+    onSubmit={executeLogin}
+  >
     <FormContent>
       <h3>{"Please enter your username and password"}</h3>
       <TextField
@@ -26,7 +31,7 @@ const LogInForm = ({ executeLogin, loginResponse }) => (
       error={loginResponse.error?.graphQLErrors}
     ></FormContent>
     <FormActions>
-      <Button disabled={loginResponse.fetching}>{"Log In"}</Button>
+      <Button>{"Log In"}</Button>
     </FormActions>
   </JoinedContentRaised>
 );
