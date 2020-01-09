@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Welcome from "./Welcome";
 import LogIn from "./LogIn";
+import CreateEntry from "./CreateEntry";
 import { User } from "./context/User";
 
 const AuthRoute = ({ children, ...props }) => {
@@ -34,8 +35,8 @@ export default () => (
       <LogIn />
     </Route>
 
-    <Route path="/somewhere">
-      <p>{"somewhere"}</p>
-    </Route>
+    <AuthRoute path="/create">
+      <CreateEntry />
+    </AuthRoute>
   </Switch>
 );
