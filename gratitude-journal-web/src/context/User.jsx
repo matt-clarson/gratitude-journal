@@ -1,7 +1,8 @@
-import React, { useState, createContext } from "react";
+import React, { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
-const NO_AUTH_FALLBACK = { authorised: false };
+const NO_AUTH_FALLBACK = JSON.stringify({ authorised: false });
+const USER = "user";
 
 export const User = createContext({
   user: NO_AUTH_FALLBACK,
@@ -9,7 +10,16 @@ export const User = createContext({
 });
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(NO_AUTH_FALLBACK);
+  const initalUser = JSON.parse(
+    window.localStorage.getItem(USER) ?? NO_AUTH_FALLBACK
+  );
+  const [user, setUserState] = useState(initalUser);
+
+  const setUser = userValue => {
+    window.localStorage.setItem(USER, JSON.stringify(userValue));
+    setUserState(userValue);
+  };
+
   return <User.Provider value={{ user, setUser }}>{children}</User.Provider>;
 };
 
