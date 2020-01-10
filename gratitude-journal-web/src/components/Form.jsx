@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import PropTypes from "prop-types";
-import { bem, classes } from "./utils/css";
+import { bem } from "./utils/css";
 import ComponentFactory from "./utils/ComponentFactory";
 import Spinner from "./Spinner";
 
