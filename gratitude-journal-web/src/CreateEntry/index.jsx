@@ -3,10 +3,13 @@ import JoinedContent from "../components/JoinedContent";
 import JoinedContentBase from "../components/JoinedContentBase";
 import JoinedContentRaised from "../components/JoinedContentRaised";
 import Button from "../components/Button";
+import Form from "../components/Form";
 import FormContent from "../components/FormContent";
 import FormActions from "../components/FormActions";
 import TextField from "../components/TextField";
 import { ReactComponent as Dreamer } from "../static/dreamer.svg";
+
+import "./style.scss";
 
 const CreateEntry = () => {
   return (
@@ -17,7 +20,7 @@ const CreateEntry = () => {
           <Dreamer width={300} height={200} />
         </JoinedContentBase>
 
-        <JoinedContentRaised isForm autoControlled>
+        <JoinedContentRaised tag={Form} autoControlled>
           <FormContent>
             <p>{"What are you grateful for? It could be:"}</p>
             <ul>
@@ -31,6 +34,8 @@ const CreateEntry = () => {
               label="Journal Entry"
               required
               maxLength={100}
+              multiline
+              fullWidth
             />
           </FormContent>
 

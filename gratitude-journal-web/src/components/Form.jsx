@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import PropTypes from "prop-types";
 import { bem, classes } from "./utils/css";
-import Section from "./Section";
+import ComponentFactory from "./utils/ComponentFactory";
 import Spinner from "./Spinner";
 
 import "./styles/form.scss";
@@ -32,13 +32,11 @@ const Form = ({
   return (
     <FormContext.Provider value={{ autoControlled }}>
       <FormCSS.Provider value={css}>
-        <Section
+        <ComponentFactory
           onSubmit={autoControlled ? autoSubmit.bind(null, onSubmit) : onSubmit}
-          {...{
-            ...baseProps,
-            className: classes(css, baseProps.className),
-            tag: "form"
-          }}
+          fixedClassName={css}
+          defaultTag="form"
+          {...baseProps}
         >
           {submitting && (
             <Spinner
@@ -48,7 +46,7 @@ const Form = ({
             />
           )}
           {children}
-        </Section>
+        </ComponentFactory>
       </FormCSS.Provider>
     </FormContext.Provider>
   );

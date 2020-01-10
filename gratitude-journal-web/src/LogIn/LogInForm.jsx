@@ -2,6 +2,7 @@ import React from "react";
 
 import Button from "../components/Button";
 import ErrorDisplay from "../components/ErrorDisplay";
+import Form from "../components/Form";
 import FormActions from "../components/FormActions";
 import FormContent from "../components/FormContent";
 import JoinedContentRaised from "../components/JoinedContentRaised";
@@ -9,8 +10,8 @@ import TextField from "../components/TextField";
 
 const LogInForm = ({ executeLogin, loginResponse }) => (
   <JoinedContentRaised
+    tag={Form}
     submitting={loginResponse.fetching}
-    isForm
     autoControlled
     onSubmit={executeLogin}
   >

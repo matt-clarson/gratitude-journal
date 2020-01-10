@@ -1,11 +1,17 @@
-.rdp-section {
-  $self: &;
+@mixin section-box {
   padding: 2vh 5vw;
   border-radius: 10px;
+}
 
-  &--raised {
+@mixin section-shadow {
+  box-shadow: 3px 4px 9px 4px rgba(0, 0, 0, 0.4);
+}
+
+.rdp-section {
+  $self: &;
+  @include section-box &--raised {
     @extend #{$self};
-    box-shadow: 3px 4px 9px 4px rgba(0, 0, 0, 0.4);
+    @include section-shadow;
   }
 
   &--flat {

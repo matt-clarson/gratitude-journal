@@ -1,0 +1,16 @@
+%page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10vh;
+
+  .primary {
+    &-polygon {
+      fill: var(--rdp-theme-primary);
+    }
+
+    &-stop {
+      stop-color: var(--rdp-theme-primary);
+    }
+  }
+}

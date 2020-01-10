@@ -1,13 +1,18 @@
+@import "./section.scss";
+
 .rdp-joined-content {
   $self: &;
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
   background: rgb(220, 220, 220);
   max-width: 1024px;
+  isolation: isolate;
 
   &__raised-wrapper {
     position: relative;
     flex-grow: 1;
+    padding-right: 10%;
   }
 
   &__base {
@@ -19,12 +24,20 @@
     border-radius: 0px;
   }
 
-  &__raised {
-    position: absolute;
-    top: -20px;
-    right: 10%;
-    bottom: -20px;
-    left: 2%;
-    background: white;
+  #{$self}__raised {
+    position: relative;
+    min-height: 100%;
+
+    &::after {
+      content: "";
+      z-index: -10;
+      @extend .rdp-section--raised;
+      position: absolute;
+      top: -20px;
+      right: 0;
+      bottom: -20px;
+      left: 0;
+      background: white;
+    }
   }
 }

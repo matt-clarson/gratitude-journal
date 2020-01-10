@@ -1,19 +1,21 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { JoinedContentCSS } from "./JoinedContent";
-import Section from "./Section";
-import Form from "./Form";
+import ComponentFactory from "./utils/ComponentFactory";
 
 import "./styles/joined-content.scss";
 
-const JoinedContentRaised = ({ children, isForm, ...baseProps }) => {
+const JoinedContentRaised = ({ children, ...baseProps }) => {
   const baseCss = useContext(JoinedContentCSS);
-  const Component = isForm ? Form : Section;
   return (
     <div className={baseCss.elem`raised-wrapper`}>
-      <Component className={baseCss.elem`raised`} {...baseProps}>
+      <ComponentFactory
+        defaultTag="section"
+        fixedClassName={baseCss.elem`raised`}
+        {...baseProps}
+      >
         {children}
-      </Component>
+      </ComponentFactory>
     </div>
   );
 };

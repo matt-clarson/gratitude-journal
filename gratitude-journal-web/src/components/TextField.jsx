@@ -18,6 +18,7 @@ const useAutoControlledInput = () => {
 
 const TextField = ({
   width = 200,
+  fullWidth,
   name,
   label,
   value,
@@ -28,18 +29,20 @@ const TextField = ({
   pattern,
   minLength,
   maxLength,
+  multiline,
   ...baseProps
 }) => {
   const css = bem`rdp-text-field`;
   const { autoControlled } = useContext(FormContext);
   const { inputRef, ...auto } = useAutoControlledInput();
+  const Input = multiline ? "textarea" : "input";
   const id = useRef(null);
   if (!id.current) {
     id.current = nanoid();
   }
   return (
     <ComponentFactory
-      style={{ width }}
+      style={{ width: fullWidth ? "100%" : width }}
       fixedClassName={css}
       defaultTag="div"
       {...baseProps}
@@ -47,7 +50,7 @@ const TextField = ({
       <label id={id.current} className={css.elem`label`}>
         {label}
       </label>
-      <input
+      <Input
         className={css.elem`input`}
         aria-labelledby={id.current}
         ref={inputRef}
@@ -81,7 +84,10 @@ TextField.propTypes = {
   title: PropTypes.string,
   pattern: PropTypes.string,
   minLength: PropTypes.number,
-  maxLength: PropTypes.number
+  maxLength: PropTypes.number,
+  multiline: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  width: PropTypes.number
 };
 
 export default TextField;
