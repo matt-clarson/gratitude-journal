@@ -7,12 +7,12 @@ import "./styles/joined-content.scss";
 
 export const JoinedContentCSS = createContext();
 
-const JoinedContent = ({ children, ...baseProps }) => {
+const JoinedContent = ({ children, floatContent = "left", ...baseProps }) => {
   const css = bem`rdp-joined-content`;
   return (
     <JoinedContentCSS.Provider value={css}>
       <ComponentFactory
-        fixedClassName={css}
+        fixedClassName={css.mod`${floatContent}`}
         defaultTag="section"
         {...baseProps}
       >
@@ -23,7 +23,8 @@ const JoinedContent = ({ children, ...baseProps }) => {
 };
 
 JoinedContent.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  floatContent: PropTypes.string
 };
 
 export default JoinedContent;

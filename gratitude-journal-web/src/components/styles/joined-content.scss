@@ -4,7 +4,7 @@
   $self: &;
   position: relative;
   display: flex;
-  flex-flow: row nowrap;
+  flex-wrap: nowrap;
   background: rgb(220, 220, 220);
   max-width: 1024px;
   isolation: isolate;
@@ -12,7 +12,6 @@
   &__raised-wrapper {
     position: relative;
     flex-grow: 1;
-    padding-right: 10%;
   }
 
   &__base {
@@ -38,6 +37,24 @@
       bottom: -20px;
       left: 0;
       background: white;
+    }
+  }
+
+  &--left {
+    @extend #{$self};
+    flex-direction: row;
+
+    #{$self}__raised-wrapper {
+      padding-right: 5%;
+    }
+  }
+
+  &--right {
+    @extend #{$self};
+    flex-direction: row-reverse;
+
+    #{$self}__raised-wrapper {
+      padding-left: 5%;
     }
   }
 }

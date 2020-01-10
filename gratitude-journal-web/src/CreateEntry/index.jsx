@@ -14,7 +14,7 @@ import "./style.scss";
 const CreateEntry = () => {
   return (
     <div className="gj-create-entry">
-      <JoinedContent>
+      <JoinedContent floatContent="right">
         <JoinedContentBase title="Add Entry">
           <h4>{"Add an entry to your gratitude journal"}</h4>
           <Dreamer width={300} height={200} />
