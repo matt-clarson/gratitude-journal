@@ -1,0 +1,32 @@
+.rdp-table {
+  $self: &;
+
+  &__header {
+    background-color: var(--rdp-theme-primary);
+    color: var(--rdp-theme-text-on-primary);
+  }
+
+  &__row {
+    &:not(:last-child) {
+      #{$self}__data {
+        border-bottom: 1px solid rgb(128, 128, 128);
+      }
+    }
+  }
+
+  &__data {
+    padding: 1.6rem;
+
+    &--left {
+      text-align: left;
+    }
+
+    &--center {
+      text-align: center;
+    }
+
+    &--right {
+      text-align: right;
+    }
+  }
+}

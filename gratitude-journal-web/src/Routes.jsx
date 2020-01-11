@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Welcome from "./Welcome";
 import LogIn from "./LogIn";
 import CreateEntry from "./CreateEntry";
+import Entries from "./Entries";
 import { User } from "./context/User";
 
 const AuthRoute = ({ children, ...props }) => {
@@ -37,6 +38,10 @@ export default () => (
 
     <AuthRoute path="/create">
       <CreateEntry />
+    </AuthRoute>
+
+    <AuthRoute path="/entries">
+      <Entries />
     </AuthRoute>
   </Switch>
 );
