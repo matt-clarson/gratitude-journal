@@ -1,6 +1,7 @@
 import graphene
 from graphql import GraphQLError
 from graphene_django import DjangoObjectType
+import random
 
 from .models import Entry
 from users.schema import UserType
@@ -34,6 +35,7 @@ class CreateEntry(graphene.Mutation):
 class Query(graphene.ObjectType):
     entries = graphene.List(EntryType)
     my_entries = graphene.List(EntryType)
+    random_entry = graphene.Field(EntryType)
 
     def resolve_entries(self, info):
         return Entry.objects.all()
@@ -41,6 +43,11 @@ class Query(graphene.ObjectType):
     def resolve_my_entries(self, info):
         user = get_authenticated_user(info)
         return user.entry_set.all()
+
+    def resolve_random_entry(self, info):
+        user = get_authenticated_user(info)
+        user_entries = user.entry_set.all()
+        return random.choice(user_entries)
 
 class Mutation(graphene.ObjectType):
     create_entry = CreateEntry.Field()
