@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 # CORS settings
 # open cors in dev mode
 
-CORS_ORIGIN_ALLOW_ALL = os.environ['DEV_MODE'] == 'true'
+CORS_ORIGIN_ALLOW_ALL = os.environ.get('DEV_MODE') == 'true'
 
 # Graphene settings
 
