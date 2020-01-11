@@ -4,9 +4,12 @@ import Header from "./components/Header";
 import HeaderTitle from "./components/HeaderTitle";
 import HeaderActions from "./components/HeaderActions";
 import HeaderActionButton from "./components/HeaderActionButton";
-import Routes from "./Routes";
 import UserProvider from "./context/User";
 import GraphQLClient from "./context/GraphQLClient";
+import CreateFAB from "./CreateFAB";
+import Routes from "./Routes";
+
+import "./common/styles.scss";
 
 const BASE_URL = process.env.GJ_APP_API;
 
@@ -31,6 +34,8 @@ function GratitudeJournal() {
           <main>
             <Routes />
           </main>
+
+          <CreateFAB />
         </GraphQLClient>
       </UserProvider>
     </div>

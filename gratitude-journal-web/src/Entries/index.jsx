@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { useQuery } from "urql";
+import { Link } from "react-router-dom";
 import AutoTable from "../components/AutoTable";
 import Section from "../components/Section";
 import Spinner from "../components/Spinner";
@@ -21,7 +22,13 @@ const Entries = () => {
         {response.data?.myEntries ? (
           <AutoTable
             title="Your gratitude journal entries"
-            emptyMessage="You do not have any entries"
+            emptyMessage={
+              <span>
+                {"You do not have any entries, "}
+                <Link to="/create">{"click here to add an entry"}</Link>
+                {"."}
+              </span>
+            }
             {...{ headers, data }}
           />
         ) : (

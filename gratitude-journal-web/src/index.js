@@ -12,7 +12,9 @@ const App = () => (
       colours={{
         primary: "#0083b0",
         primaryGradient: "#00b4db",
+        secondary: "#ff5e27",
         textOnPrimary: "#ffffff",
+        textOnSecondary: "#ffffff",
         textOnSurface: "#000000",
         error: "red"
       }}

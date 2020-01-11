@@ -45,3 +45,30 @@
     }
   }
 }
+
+.rdp-floating-action-button {
+  $self: &;
+  position: fixed;
+  width: 75px;
+  height: 75px;
+  background-color: var(--rdp-theme-secondary);
+  color: var(--rdp-theme-text-on-secondary);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 5px 5px 7px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &--disabled {
+    @extend #{$self};
+    background-color: rgb(200, 200, 200);
+    cursor: auto;
+  }
+}
