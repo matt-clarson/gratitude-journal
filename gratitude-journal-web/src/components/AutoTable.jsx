@@ -6,7 +6,14 @@ import TableData from "./TableData";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
-const AutoTable = ({ title, headers, data, rowKey = "id", ...baseProps }) => {
+const AutoTable = ({
+  title,
+  emptyMessage,
+  headers,
+  data,
+  rowKey = "id",
+  ...baseProps
+}) => {
   return (
     <Table {...{ title, ...baseProps }}>
       <TableHeader>
@@ -19,18 +26,24 @@ const AutoTable = ({ title, headers, data, rowKey = "id", ...baseProps }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map(({ id, ...dataEntry }) => (
-          <TableRow key={id.value}>
-            {headers.map(({ key }) => {
-              const { value, display, ...props } = dataEntry[key];
-              return (
-                <TableData key={value} {...props}>
-                  {display?.(value) ?? value}
-                </TableData>
-              );
-            })}
+        {data.length > 0 ? (
+          data.map(({ id, ...dataEntry }) => (
+            <TableRow key={id.value}>
+              {headers.map(({ key }) => {
+                const { value, display, ...props } = dataEntry[key];
+                return (
+                  <TableData key={value} {...props}>
+                    {display?.(value) ?? value}
+                  </TableData>
+                );
+              })}
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableData colspan={headers.length}>{emptyMessage}</TableData>
           </TableRow>
-        ))}
+        )}
       </TableBody>
     </Table>
   );
@@ -44,7 +57,8 @@ AutoTable.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.objectOf(PropTypes.shape({ value: PropTypes.node.isRequired }))
   ),
-  rowKey: PropTypes.string
+  rowKey: PropTypes.string,
+  emptyMessage: PropTypes.node
 };
 
 export default AutoTable;

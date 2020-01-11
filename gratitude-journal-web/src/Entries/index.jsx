@@ -21,6 +21,7 @@ const Entries = () => {
         {response.data?.myEntries ? (
           <AutoTable
             title="Your gratitude journal entries"
+            emptyMessage="You do not have any entries"
             {...{ headers, data }}
           />
         ) : (
