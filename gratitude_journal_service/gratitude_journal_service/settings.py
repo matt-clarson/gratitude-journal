@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+DEV_MODE = os.environ.get('DEV_MODE') == 'true'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'd-rp1h+%2n21$_6)@vlmvxqjao=z8cf%w*5-d%$ch4g8%-nnsp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = DEV_MODE
 
 ALLOWED_HOSTS = ["*"]
 
@@ -127,7 +129,7 @@ STATIC_URL = '/static/'
 # CORS settings
 # open cors in dev mode
 
-CORS_ORIGIN_ALLOW_ALL = os.environ.get('DEV_MODE') == 'true'
+CORS_ORIGIN_ALLOW_ALL = DEV_MODE
 
 # Graphene settings
 
