@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import Home from "./Home";
 import Welcome from "./Welcome";
 import LogIn from "./LogIn";
 import CreateEntry from "./CreateEntry";
@@ -25,7 +26,7 @@ const AuthRoute = ({ children, ...props }) => {
 export default () => (
   <Switch>
     <AuthRoute path="/" exact>
-      <p>{"Homepage"}</p>
+      <Home />
     </AuthRoute>
 
     <Route path="/welcome">

@@ -1,6 +1,7 @@
 @mixin section-box {
   padding: 2vh 5vw;
   border-radius: 10px;
+  border: 1px solid rgb(128, 128, 128);
 }
 
 @mixin section-shadow {
@@ -9,13 +10,27 @@
 
 .rdp-section {
   $self: &;
+
   @include section-box &--raised {
     @extend #{$self};
     @include section-shadow;
+    border-color: rgba(0, 0, 0, 0);
   }
 
   &--flat {
     @extend #{$self};
-    border: 1px solid rgb(128, 128, 128);
+  }
+}
+
+.rdp-section-group {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10vh 10vw;
+
+  [class^="rdp-section"] {
+    margin: 20px;
+    transition: box-shadow 150ms ease-in;
   }
 }
