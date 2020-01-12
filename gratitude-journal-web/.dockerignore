@@ -6,4 +6,5 @@
 !config/
 !.env.production*
 !package*
-!httpd.conf
+!server/package*
+!server/index.js

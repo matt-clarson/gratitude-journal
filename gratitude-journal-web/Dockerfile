@@ -5,6 +5,10 @@ RUN apk add --no-cache python make g++
 RUN npm ci
 RUN npm run build
 
-FROM httpd:2.4.41-alpine
-COPY --from=app-build /app/build /usr/local/apache2/htdocs
-COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
+FROM node:13.6.0-alpine3.11
+COPY --from=app-build /app/build /var/www/site
+ENV STATIC_DIR=/var/www/site
+WORKDIR /server
+COPY ./server /server
+RUN npm ci --only-production
+ENTRYPOINT ["node", "index.js"]
