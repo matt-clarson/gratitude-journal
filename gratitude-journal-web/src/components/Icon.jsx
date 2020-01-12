@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ComponentFactory from "./utils/ComponentFactory";
 import { bem } from "./utils/css";
 
-import "./styles/icons.scss";
+import "./styles/icons.css";
 
 const Icon = ({ icon, ...baseProps }) => (
   <ComponentFactory
