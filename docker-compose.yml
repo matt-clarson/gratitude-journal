@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  gj-db:
+    image: postgres:12.1-alpine
+  gj-service:
+    build:
+      context: ./gratitude_journal_service
+    environment:
+      DB_HOST: gj-db
+      DB-PORT: 5432
+    ports:
+      - "8000:8000"
+    command: >
+      bash -c "python manage.py wait_for_db &&
+      python manage.py migrate && 
+      python manage.py runserver 0.0.0.0:8000"
