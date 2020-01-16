@@ -11,4 +11,4 @@ ENV STATIC_DIR=/var/www/site
 WORKDIR /server
 COPY ./server /server
 RUN npm ci --only-production
-ENTRYPOINT ["node", "index.js"]
+CMD ["node", "index.js"]
