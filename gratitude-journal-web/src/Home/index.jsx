@@ -13,7 +13,7 @@ import { formatEntry } from "./utils";
 import "./style.scss";
 
 const Home = () => {
-  const [randomEntryResponse, executeRandomEntry] = useQuery({
+  const [randomEntryResponse] = useQuery({
     query: RANDOM_ENTRY
   });
   return (
