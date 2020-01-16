@@ -1,8 +1,12 @@
-FROM node:13.6.0-alpine3.11 AS app-build
+FROM node:13.6.0-alpine3.11 AS base
 WORKDIR /app
-COPY . /app
+COPY ./package* /app/
 RUN apk add --no-cache python make g++
 RUN npm ci
+
+FROM base AS app-build
+WORKDIR /app
+COPY . /app
 RUN npm run build
 
 FROM node:13.6.0-alpine3.11

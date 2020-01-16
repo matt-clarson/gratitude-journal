@@ -1,10 +1,1 @@
-**
-
-!src/
-!scripts/
-!public/
-!config/
-!.env.production*
-!package*
-!server/package*
-!server/index.js
+node_modules/
