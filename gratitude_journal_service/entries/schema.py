@@ -33,12 +33,8 @@ class CreateEntry(graphene.Mutation):
         )
 
 class Query(graphene.ObjectType):
-    entries = graphene.List(EntryType)
     my_entries = graphene.List(EntryType)
     random_entry = graphene.Field(EntryType)
-
-    def resolve_entries(self, info):
-        return Entry.objects.all()
 
     def resolve_my_entries(self, info):
         user = get_authenticated_user(info)
