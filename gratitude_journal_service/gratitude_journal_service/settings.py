@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import logging
 
 DEV_MODE = os.environ.get('DEV_MODE') == 'true'
+TEST_RUNNER = 'redgreenunittest.django.runner.RedGreenDiscoverRunner'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +28,18 @@ SECRET_KEY = 'd-rp1h+%2n21$_6)@vlmvxqjao=z8cf%w*5-d%$ch4g8%-nnsp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = DEV_MODE
+
+log_levels = {
+    'debug': logging.DEBUG,
+    'info': logging.INFO,
+    'warn': logging.WARNING,
+    'error': logging.ERROR,
+    'critical': logging.CRITICAL,
+    # logging.CRITICAL resolves to 50 - setting the log level to 80 effectively disables logging
+    'off': 80
+}
+LOG_LEVEL = log_levels[os.environ.get('LOG_LEVEL', 'critical')]
+logging.basicConfig(level=LOG_LEVEL)
 
 ALLOWED_HOSTS = ["*"]
 
