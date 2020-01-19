@@ -11,7 +11,6 @@ from entries.schema import Query
 TEST_ENTRIES_QUERY = '''
     query {
         myEntries {
-            id
             content
             postedBy {
                 username
@@ -57,8 +56,8 @@ class TestMyEntries(TestCase):
     def test_users_cannot_see_other_entries(self):
         user1_response = self.client.execute(TEST_ENTRIES_QUERY, context=Mock(user=self.user1))
         user2_response = self.client.execute(TEST_ENTRIES_QUERY, context=Mock(user=self.user2))
-        get_ids = lambda xs: [x['id'] for x in xs['data']['myEntries']]
-        user1_ids = get_ids(user1_response)
-        user2_ids = get_ids(user2_response)
-        self.assertCollectionsDoNotOverlap(user1_ids, user2_ids)
+        get_entries = lambda response: [(entry['content'], entry['postedBy']['username']) for entry in response['data']['myEntries']]
+        user1_entries = get_entries(user1_response)
+        user2_entries = get_entries(user2_response)
+        self.assertCollectionsDoNotOverlap(user1_entries, user2_entries)
 
