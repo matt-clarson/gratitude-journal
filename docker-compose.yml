@@ -1,14 +1,25 @@
 version: "3.7"
 services:
-  gj-db:
+  db:
     image: postgres:12.1-alpine
-  gj-service:
-    image: gj-service:latest
-    depends_on:
-      - gj-db
-  gj-ui:
-    image: gj-ui:latest
-    depends_on:
-      - gj-db
-      - gj-service
 
+  service:
+    build:
+      context: ./gratitude_journal_service
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+    command: >
+      bash -c "
+        python manage.py migrate &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+
+  ui:
+    build:
+      context: ./gratitude-journal-web
+    command: "npm start"
+    environment:
+      PORT: 3000
+    ports:
+      - "3000:3000"

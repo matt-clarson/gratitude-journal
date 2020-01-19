@@ -4,51 +4,39 @@ volumes:
   dev-db:
 
 services:
-  gj-db:
-    image: postgres:12.1-alpine
+  db:
     volumes:
       - "dev-db:/var/lib/postgresql/data"
 
-  gj-service:
+  service-test:
     build:
       context: ./gratitude_journal_service
       target: base
-    command: >
-      bash -c "
-        python manage.py migrate && 
-        python manage.py runserver 0.0.0.0:8000
-      "
+    command: python manage.py test
     depends_on:
-      - gj-db
+      - db
     environment:
-      DB_HOST: gj-db
+      DB_HOST: db
       DB_PORT: 5432
       DEV_MODE: "true"
+    volumes:
+      - ./gratitude_journal_service:/server
+
+  service:
+    build:
+      context: ./gratitude_journal_service
+      target: base
+    depends_on:
+      - db
+    environment:
+      DEV_MODE: "true"
+      LOG_LEVEL: debug
     ports:
       - "8000:8000"
     volumes:
       - ./gratitude_journal_service:/server
 
-  gj-ui:
-    build:
-      context: ./gratitude-journal-web
-      target: base
-    command: "npm start"
-    depends_on:
-      - gj-service
-      - gj-db
-    environment:
-      PORT: 3000
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./gratitude-journal-web/src:/app/src
-      - ./gratitude-journal-web/config:/app/config
-      - ./gratitude-journal-web/public:/app/public
-      - ./gratitude-journal-web/scripts:/app/scripts
-      - ./gratitude-journal-web/.env.development.local:/app/.env.development.local
-
-  gj-ui-test:
+  ui-test:
     build:
       context: ./gratitude-journal-web
       target: base
@@ -57,3 +45,17 @@ services:
       - ./gratitude-journal-web/src:/app/src
       - ./gratitude-journal-web/config:/app/config
       - ./gratitude-journal-web/scripts:/app/scripts
+
+  ui:
+    build:
+      context: ./gratitude-journal-web
+      target: base
+    depends_on:
+      - db
+      - service
+    volumes:
+      - ./gratitude-journal-web/src:/app/src
+      - ./gratitude-journal-web/config:/app/config
+      - ./gratitude-journal-web/public:/app/public
+      - ./gratitude-journal-web/scripts:/app/scripts
+      - ./gratitude-journal-web/.env.development.local:/app/.env.development.local

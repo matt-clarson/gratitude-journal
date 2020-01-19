@@ -2,27 +2,18 @@ version: "3.7"
 volumes:
   prod-db:
 services:
-  gj-db:
+  db:
     image: postgres:12.1-alpine
     volumes:
       - "prod-db:/var/lib/postgresql/data"
-  gj-service:
-    build:
-      context: ./gratitude_journal_service
+
+  service:
+    depends_on:
+      - db
+
+  ui:
+    depends_on:
+      - db
+      - service
     environment:
-      DB_HOST: gj-db
-      DB_PORT: 5432
-    command: >
-      bash -c "
-        python manage.py migrate && 
-        python manage.py runserver 0.0.0.0:8000
-      "
-  gj-ui:
-    build:
-      context: ./gratitude-journal-web
-    environment:
-      PORT: 3000
-      GRAPHQL_FORWARD_TO: gj-service:8000
-    ports:
-      - "3000:3000"
-    command: "npm start"
+      GRAPHQL_FORWARD_TO: service:8000
