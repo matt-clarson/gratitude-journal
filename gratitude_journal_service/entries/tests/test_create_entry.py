@@ -1,5 +1,4 @@
-from django.test import TestCase
-import snapshottest
+from tests.utils import TestCase
 from unittest.mock import Mock
 from django.contrib.auth.models import AnonymousUser, User
 from graphene import Schema
@@ -19,7 +18,7 @@ TEST_ENTRY_MUTATION = '''
         }
     }
 '''
-class TestCreateEntry(TestCase, snapshottest.TestCase):
+class TestCreateEntry(TestCase):
     def setUp(self):
         self.schema = Schema(query=Query, mutation=Mutation)
         self.client = Client(self.schema)
