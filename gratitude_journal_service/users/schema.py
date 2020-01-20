@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 
 import graphene
+from graphql_jwt.utils import jwt_payload, jwt_encode
 from graphene_django import DjangoObjectType
 from common.utils import get_authenticated_user
 
@@ -10,6 +11,7 @@ class UserType(DjangoObjectType):
 
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)
+    token = graphene.String()
 
     class Arguments:
         username = graphene.String(required=True)
@@ -24,7 +26,10 @@ class CreateUser(graphene.Mutation):
         user.set_password(kwargs['password'])
         user.save()
 
-        return CreateUser(user=user)
+        user_payload = jwt_payload(user)
+        jwt = jwt_encode(user_payload)
+
+        return CreateUser(user=user, token=jwt)
 
 class Query(graphene.ObjectType):
     users = graphene.List(UserType)
