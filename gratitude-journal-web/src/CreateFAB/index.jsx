@@ -5,7 +5,7 @@ import FloatingActionButton from "../components/FloatingActionButton";
 import "./style.scss";
 
 const CreateFAB = () => {
-  const match = useRouteMatch("/(create|welcome|log-in)");
+  const match = useRouteMatch("/(create|welcome|log-in|sign-up)");
   return (
     !match && (
       <FloatingActionButton

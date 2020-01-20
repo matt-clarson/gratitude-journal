@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./Home";
 import Welcome from "./Welcome";
 import LogIn from "./LogIn";
+import SignUp from "./SignUp";
 import CreateEntry from "./CreateEntry";
 import Entries from "./Entries";
 import { User } from "./context/User";
@@ -35,6 +36,10 @@ export default () => (
 
     <Route path="/log-in">
       <LogIn />
+    </Route>
+
+    <Route path="/sign-up">
+      <SignUp />
     </Route>
 
     <AuthRoute path="/create">
