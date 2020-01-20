@@ -1,0 +1,45 @@
+- model: auth.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$180000$u0Oq9u2KGQmf$saQ9Mh/SAeKWFTcpSGpXWup6g0yhOnQSrBQB7JaHI/A=
+    last_login: null
+    is_superuser: false
+    username: indiana_jones
+    first_name: ''
+    last_name: ''
+    email: jones.i@uchicago.edu
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-19 12:23:56.910880+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 3
+  fields:
+    password: pbkdf2_sha256$180000$ktM7oT9s5cjN$B8zfjf0bHQmGhPbn/LxZI64C2/rrhOnQ44zDmt5d4Ws=
+    last_login: null
+    is_superuser: false
+    username: peter_parker
+    first_name: ''
+    last_name: ''
+    email: pparker@empire-state.edu
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-19 12:27:54.125174+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 4
+  fields:
+    password: pbkdf2_sha256$180000$IajeIcJlTkE8$X7ymok1fwoTWG2fDzyxA3rSNgVtG9vF4wZVAXYuxJxA=
+    last_login: null
+    is_superuser: false
+    username: hermione_g
+    first_name: ''
+    last_name: ''
+    email: hgranger@magic.gov.uk
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-19 12:29:13.686349+00:00
+    groups: []
+    user_permissions: []
