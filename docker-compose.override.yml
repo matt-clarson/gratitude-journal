@@ -10,18 +10,41 @@ services:
 
   test-db:
     image: postgres:12.1-alpine
+    
+  service-test-refresh-db:
+    build:
+      context: ./gratitude_journal_service
+      target: base
+    command: >
+      bash -c "
+        python manage.py flush --no-input &&
+        python manage.py migrate &&
+        python manage.py loaddata users.yaml entries.yaml
+      "
+    environment:
+      DB_HOST: test-db
+      DB_PORT: 5432
+      DEV_MODE: 'true'
+    image: gj-service:dev
+    volumes:
+      - ./gratitude_journal_service:/server
 
   service-test-e2e:
     build:
       context: ./gratitude_journal_service
       target: base
-    command: python manage.py testserver users.yaml entries.yaml --addrport 0.0.0.0:8000
+    command: >
+      bash -c "
+        python manage.py migrate &&
+        python manage.py runserver 0.0.0.0:8000
+      "
     depends_on:
       - test-db
     environment:
       DB_HOST: test-db
       DB_PORT: 5432
       DEV_MODE: 'true'
+    image: gj-service:dev
     ports:
       - "8000:8000"
     volumes:
@@ -38,6 +61,7 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DEV_MODE: "true"
+    image: gj-service:dev
     volumes:
       - ./gratitude_journal_service:/server
 
@@ -50,6 +74,7 @@ services:
     environment:
       DEV_MODE: "true"
       LOG_LEVEL: debug
+    image: gj-service:dev
     ports:
       - "8000:8000"
     volumes:
@@ -58,12 +83,15 @@ services:
   ui-test:
     build:
       context: ./gratitude-journal-web
-      target: base
-    command: "npm test"
-    volumes:
-      - ./gratitude-journal-web/src:/app/src
-      - ./gratitude-journal-web/config:/app/config
-      - ./gratitude-journal-web/scripts:/app/scripts
+    command: "npm start"
+    depends_on:
+      - service-test-e2e
+    environment:
+      PORT: 3000
+      GRAPHQL_FORWARD_TO: service-test-e2e:8000
+    image: gj-web:build
+    ports:
+      - "3000:3000"
 
   ui:
     build:
@@ -72,6 +100,7 @@ services:
     depends_on:
       - db
       - service
+    image: gj-web:dev
     volumes:
       - ./gratitude-journal-web/src:/app/src
       - ./gratitude-journal-web/config:/app/config
