@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.db import IntegrityError
 
+from graphql import GraphQLError
 import graphene
 from graphql_jwt.utils import jwt_payload, jwt_encode
 from graphene_django import DjangoObjectType
@@ -19,10 +21,12 @@ class CreateUser(graphene.Mutation):
         email = graphene.String(required=True)
 
     def mutate(self, info, **kwargs):
-        user = get_user_model()(
+        user, created = get_user_model().objects.get_or_create(
                 username = kwargs['username'],
                 email = kwargs['email']
         )
+        if not created:
+            raise GraphQLError(f"Username \"{kwargs['username']}\" already exists - try using a different one")
         user.set_password(kwargs['password'])
         user.save()
 
