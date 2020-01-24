@@ -1,0 +1,24 @@
+{
+  "name": "gratitude-journal",
+  "version": "0.0.1",
+  "description": "Gratitude Journal full stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:dev": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matt-clarson/gratitude-journal.git"
+  },
+  "author": "matt-clarson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matt-clarson/gratitude-journal/issues"
+  },
+  "homepage": "https://github.com/matt-clarson/gratitude-journal#readme",
+  "dependencies": {
+    "cypress": "^3.8.2",
+    "cypress-plugin-snapshots": "^1.2.9"
+  }
+}
