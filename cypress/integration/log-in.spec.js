@@ -2,6 +2,10 @@ import { fixCypressSpec } from "../support/fix-spec";
 import users from "../fixtures/users/existing-users.json";
 
 describe("log in page", function() {
+  before(function() {
+    cy.exec("docker-compose run --no-deps service-test-refresh-db");
+  });
+
   beforeEach(fixCypressSpec(__filename));
   beforeEach(function() {
     cy.visit("/log-in");
@@ -29,10 +33,6 @@ describe("log in page", function() {
   );
 
   describe("as a non-existant user", function() {
-    before(function() {
-      cy.exec("docker-compose run --no-deps service-test-refresh-db");
-    });
-
     it("should present credential error", function() {
       cy.fixture("users/new-user.json").then(cy.logIn);
 

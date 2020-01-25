@@ -8,9 +8,6 @@ services:
     volumes:
       - "dev-db:/var/lib/postgresql/data"
 
-  test-db:
-    image: postgres:12.1-alpine
-    
   service-test-refresh-db:
     build:
       context: ./gratitude_journal_service
@@ -22,14 +19,14 @@ services:
         python manage.py loaddata users.yaml entries.yaml
       "
     environment:
-      DB_HOST: test-db
+      DB_HOST: db
       DB_PORT: 5432
       DEV_MODE: 'true'
     image: gj-service:dev
     volumes:
       - ./gratitude_journal_service:/server
 
-  service-test-e2e:
+  service:
     build:
       context: ./gratitude_journal_service
       target: base
@@ -39,9 +36,9 @@ services:
         python manage.py runserver 0.0.0.0:8000
       "
     depends_on:
-      - test-db
+      - db
     environment:
-      DB_HOST: test-db
+      DB_HOST: db
       DB_PORT: 5432
       DEV_MODE: 'true'
     image: gj-service:dev
@@ -64,34 +61,6 @@ services:
     image: gj-service:dev
     volumes:
       - ./gratitude_journal_service:/server
-
-  service:
-    build:
-      context: ./gratitude_journal_service
-      target: base
-    depends_on:
-      - db
-    environment:
-      DEV_MODE: "true"
-      LOG_LEVEL: debug
-    image: gj-service:dev
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./gratitude_journal_service:/server
-
-  ui-test:
-    build:
-      context: ./gratitude-journal-web
-    command: "npm start"
-    depends_on:
-      - service-test-e2e
-    environment:
-      PORT: 3000
-      GRAPHQL_FORWARD_TO: service-test-e2e:8000
-    image: gj-web:build
-    ports:
-      - "3000:3000"
 
   ui:
     build:

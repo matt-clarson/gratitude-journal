@@ -1,6 +1,10 @@
 import { fixCypressSpec } from "../support/fix-spec";
 
 describe("Sign Up Functionality", function() {
+  before(function() {
+    cy.exec("docker-compose run --no-deps service-test-refresh-db");
+  });
+
   beforeEach(fixCypressSpec(__filename));
 
   it("should match snapshot", function() {
@@ -8,10 +12,6 @@ describe("Sign Up Functionality", function() {
   });
 
   describe("as a new user", function() {
-    before(function() {
-      cy.exec("docker-compose run --no-deps service-test-refresh-db");
-    });
-
     it("should redirect to the home page on successful login", function() {
       cy.visit("/sign-up");
 
