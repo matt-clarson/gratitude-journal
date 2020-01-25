@@ -23,6 +23,7 @@ describe("entries page", function() {
     });
 
     it("should match snapshot", function() {
+      cy.contains("Your gratitude journal entries").trigger("mouseover");
       cy.document().toMatchImageSnapshot();
     });
   });
@@ -36,6 +37,7 @@ describe("entries page", function() {
     });
 
     it("should match snapshot", function() {
+      cy.contains("Your gratitude journal entries").trigger("mouseover");
       cy.document().toMatchImageSnapshot();
     });
   });
