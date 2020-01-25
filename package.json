@@ -4,7 +4,9 @@
   "description": "Gratitude Journal full stack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:setup": "docker-compose run --service-ports --detach ui",
+    "test:teardown": "docker-compose down",
+    "test": "./wait-for-it.sh --host=localhost --port=3000 && cypress run",
     "test:dev": "cypress open"
   },
   "repository": {

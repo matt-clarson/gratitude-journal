@@ -7,3 +7,6 @@ venv/
 __pycache__/
 db.sqlite3
 
+# cypress
+cypress/videos
+cypress/screenshots
