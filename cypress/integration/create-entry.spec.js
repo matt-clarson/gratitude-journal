@@ -1,6 +1,6 @@
 import { fixCypressSpec } from "../support/fix-spec";
 
-describe("entries page", function() {
+describe("create entry page", function() {
   before(function() {
     cy.exec("docker-compose run --no-deps service-test-refresh-db");
   });
