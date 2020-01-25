@@ -2,16 +2,19 @@
   {
     "email": "jones.i@uchicago.edu",
     "username": "indiana_jones",
-    "password": "museum"
+    "password": "museum",
+    "repeatPassword": "museum"
   },
   {
     "email": "pparker@empire-state.edu",
     "username": "peter_parker",
-    "password": "spiderman"
+    "password": "spiderman",
+    "repeatPassword": "spiderman"
   },
   {
     "email": "hgranger@magic.gov.uk",
     "username": "hermione_g",
-    "password": "hogwarts"
+    "password": "hogwarts",
+    "repeatPassword": "hogwarts"
   }
 ]
