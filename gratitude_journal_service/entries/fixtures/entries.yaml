@@ -5,12 +5,6 @@
     created: 2020-01-19 12:30:13.380051+00:00
     posted_by: 2
 - model: entries.entry
-  pk: 3
-  fields:
-    content: The Nazis were beaten in the war
-    created: 2020-01-19 12:30:50.635832+00:00
-    posted_by: 2
-- model: entries.entry
   pk: 4
   fields:
     content: My secret identity is safe
@@ -25,19 +19,8 @@
 - model: entries.entry
   pk: 6
   fields:
-    content: There's currently no major crime syndicates or organized crime operations
+    content:
+      There's currently no major crime syndicates or organized crime operations
       in Manhattan
     created: 2020-01-19 12:32:24.749758+00:00
     posted_by: 3
-- model: entries.entry
-  pk: 7
-  fields:
-    content: 'I have re-read Hogwarts: A History'
-    created: 2020-01-19 12:32:55.373062+00:00
-    posted_by: 4
-- model: entries.entry
-  pk: 8
-  fields:
-    content: All house elves have been given proper employment contracts
-    created: 2020-01-19 12:33:45.552912+00:00
-    posted_by: 4

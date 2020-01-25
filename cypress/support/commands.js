@@ -38,3 +38,23 @@ Cypress.Commands.add("logIn", userInfo =>
     .contains("button", "Log In")
     .click()
 );
+
+Cypress.Commands.add("beUser", function({ username, password }) {
+  cy.request("POST", `http://localhost:8000/graphql/`, {
+    query: `
+      mutation {
+        tokenAuth(username: "${username}", password: "${password}") {
+          token
+        }
+      }
+    `
+  })
+    .then(response => response.body.data.tokenAuth.token)
+    .as("authToken");
+  cy.window().then(window =>
+    window.localStorage.setItem(
+      "user",
+      JSON.stringify({ authorised: true, token: this.authToken })
+    )
+  );
+});
