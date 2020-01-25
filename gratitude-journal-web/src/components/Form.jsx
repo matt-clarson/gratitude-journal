@@ -38,14 +38,15 @@ const Form = ({
           defaultTag="form"
           {...baseProps}
         >
-          {submitting && (
+          {submitting ? (
             <Spinner
               size="m"
               message="Submitting..."
               className={css.elem`spinner`}
             />
+          ) : (
+            children
           )}
-          {children}
         </ComponentFactory>
       </FormCSS.Provider>
     </FormContext.Provider>
