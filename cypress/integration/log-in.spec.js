@@ -7,6 +7,10 @@ describe("log in page", function() {
     cy.visit("/log-in");
   });
 
+  it("should match snapshot", function() {
+    cy.document().toMatchImageSnapshot();
+  });
+
   users.forEach(user =>
     describe(`as existing user ${user.username}`, function() {
       it("should redirect to home page", function() {
