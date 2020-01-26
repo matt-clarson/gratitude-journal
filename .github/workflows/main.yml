@@ -18,6 +18,17 @@ jobs:
         run: docker-compose run --service-ports --detach ui
       - name: Verify running docker containers
         run: docker ps -a
-      - uses: cypress-io/github-action@v1
+      - name: Install and run cypress tests
+        uses: cypress-io/github-action@v1
+      - name: Save failure snapshots as artifact
+        uses: actions/upload-artifact@v1
+        if: failure()
         with:
-          headless: true
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - name: Save test videos as artifact
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
