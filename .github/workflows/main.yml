@@ -2,18 +2,9 @@ name: CI
 
 on: [push]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Build docker images
-        run: docker-compose build
-        
+jobs:   
   service-tests:
     runs-on: ubuntu-latest
-    needs:
-      - build
     steps:
       - uses: actions/checkout@v1
       - name: Run backend tests
@@ -21,12 +12,12 @@ jobs:
   
   e2e-tests:
     runs-on: ubuntu-latest
-    needs:
-      - build
     steps:
       - uses: actions/checkout@v1
       - name: Setup environment
         run: docker-compose run --service-ports --detach ui
+      - name: Verify running docker containers
+        run: docker ps -a
       - uses: cypress-io/github-action@v1
         with:
           headless: true
@@ -38,5 +29,6 @@ jobs:
       - e2e-tests
     if: always()
     steps:
+      - uses: actions/checkout@v1
       - name: Cleanup up docker containers
         run: docker-compose down
