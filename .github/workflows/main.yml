@@ -21,14 +21,3 @@ jobs:
       - uses: cypress-io/github-action@v1
         with:
           headless: true
-          
-  cleanup:
-    runs-on: ubuntu-latest
-    needs:
-      - service-tests
-      - e2e-tests
-    if: always()
-    steps:
-      - uses: actions/checkout@v1
-      - name: Cleanup up docker containers
-        run: docker-compose down
