@@ -76,4 +76,5 @@ services:
       - ./gratitude-journal-web/config:/app/config
       - ./gratitude-journal-web/public:/app/public
       - ./gratitude-journal-web/scripts:/app/scripts
+      - ./gratitude-journal-web/.env.development:/app/.env.development
       - ./gratitude-journal-web/.env.development.local:/app/.env.development.local
