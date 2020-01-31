@@ -3,8 +3,6 @@ import { useQuery } from "urql";
 import Section from "../components/Section";
 import SectionGroup from "../components/SectionGroup";
 import Spinner from "../components/Spinner";
-import { ReactComponent as ArticleSVG } from "../static/article.svg";
-import { ReactComponent as LinkSVG } from "../static/link.svg";
 import { RANDOM_ENTRY } from "./queries";
 import About from "./About";
 import Links from "./Links";
