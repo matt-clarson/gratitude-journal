@@ -15,7 +15,7 @@ const Dialog = ({ size = "m", open, onClose, children, ...baseProps }) => (
     {open && (
       <div className={css.elem`backdrop`} onClick={onClose}>
         <ComponentFactory
-          defaultTag="div"
+          defaultTag="dialog"
           fixedClassName={css.mod`${size}`}
           {...{
             ...baseProps,
