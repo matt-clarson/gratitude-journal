@@ -1,11 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Header from "./components/Header";
-import HeaderTitle from "./components/HeaderTitle";
-import HeaderActions from "./components/HeaderActions";
-import HeaderActionButton from "./components/HeaderActionButton";
 import UserProvider from "./context/User";
 import GraphQLClient from "./context/GraphQLClient";
+import AppHeader from "./AppHeader";
 import CreateFAB from "./CreateFAB";
 import Routes from "./Routes";
 
@@ -18,18 +14,7 @@ function GratitudeJournal() {
     <div className="gj-app">
       <UserProvider>
         <GraphQLClient baseUrl={BASE_URL}>
-          <Header>
-            <HeaderTitle tag={Link} to="/">
-              {"Gratitude Journal"}
-            </HeaderTitle>
-
-            <HeaderActions>
-              <HeaderActionButton
-                icon={"account_circle"}
-                onClick={() => console.log("account info")}
-              />
-            </HeaderActions>
-          </Header>
+          <AppHeader />
 
           <main>
             <Routes />
