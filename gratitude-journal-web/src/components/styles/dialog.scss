@@ -1,0 +1,87 @@
+@import "./common.scss";
+@import "./section.scss";
+
+%dialog-separator {
+  &:not(:last-child) {
+    border-bottom: 1px solid rgb(100, 100, 100);
+  }
+}
+
+@mixin dialog-size($width, $height) {
+  width: $width;
+  height: $height;
+  top: calc(50vh - (#{$height} / 2));
+  left: calc(50vw - (#{$width} / 2));
+}
+
+.rdp-dialog__backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.rdp-dialog {
+  $self: &;
+  position: fixed;
+  display: flex;
+  flex-flow: column nowrap;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background: white;
+  @include section-box;
+  @include section-shadow;
+
+  &--s {
+    @extend #{$self};
+    @include dialog-size(250px, 180px);
+  }
+
+  &--m {
+    @extend #{$self};
+    @include dialog-size(400px, 300px);
+  }
+
+  &--l {
+    @extend #{$self};
+    @include dialog-size(600px, 450px);
+  }
+
+  &--fs {
+    @extend #{$self};
+    @include dialog-size(90vw, 90vh);
+  }
+
+  &__title {
+    @extend %dialog-separator;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px 0 15px;
+  }
+
+  &__title-close-button {
+    @extend %button-base;
+    @extend %transparent-button;
+  }
+
+  &__content {
+    @extend %dialog-separator;
+    flex-grow: 1;
+    padding: 0 5px 0 15px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2vh 5px;
+  }
+}

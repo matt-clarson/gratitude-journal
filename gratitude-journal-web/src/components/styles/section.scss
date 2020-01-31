@@ -1,22 +1,22 @@
 @mixin section-box {
-  padding: 2vh 5vw;
   border-radius: 10px;
   border: 1px solid rgb(128, 128, 128);
 }
 
 @mixin section-shadow {
   box-shadow: 3px 4px 9px 4px rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 0, 0, 0);
 }
 
 .rdp-section {
   $self: &;
+  padding: 2vh 5vw;
 
   @include section-box;
 
   &--raised {
     @extend #{$self};
     @include section-shadow;
-    border-color: rgba(0, 0, 0, 0);
   }
 
   &--flat {
