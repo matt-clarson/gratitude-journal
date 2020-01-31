@@ -5,37 +5,32 @@ import { bem } from "./utils/css";
 
 import "./styles/dialog.scss";
 
-export const DialogCSS = createContext();
+export const css = bem`rdp-dialog`;
 export const DialogContext = createContext();
 
 const SIZES = ["s", "m", "l", "fs"];
 
-const Dialog = ({ size = "m", open, onClose, children, ...baseProps }) => {
-  const css = bem`rdp-dialog`;
-  return (
-    <DialogCSS.Provider value={css}>
-      <DialogContext.Provider value={{ onClose }}>
-        {open && (
-          <div className={css.elem`backdrop`} onClick={onClose}>
-            <ComponentFactory
-              defaultTag="div"
-              fixedClassName={css.mod`${size}`}
-              {...{
-                ...baseProps,
-                onClick: event => {
-                  event.stopPropagation();
-                  return baseProps.onClick?.(event);
-                }
-              }}
-            >
-              {children}
-            </ComponentFactory>
-          </div>
-        )}
-      </DialogContext.Provider>
-    </DialogCSS.Provider>
-  );
-};
+const Dialog = ({ size = "m", open, onClose, children, ...baseProps }) => (
+  <DialogContext.Provider value={{ onClose }}>
+    {open && (
+      <div className={css.elem`backdrop`} onClick={onClose}>
+        <ComponentFactory
+          defaultTag="div"
+          fixedClassName={css.mod`${size}`}
+          {...{
+            ...baseProps,
+            onClick: event => {
+              event.stopPropagation();
+              return baseProps.onClick?.(event);
+            }
+          }}
+        >
+          {children}
+        </ComponentFactory>
+      </div>
+    )}
+  </DialogContext.Provider>
+);
 
 Dialog.propTypes = {
   children: PropTypes.node.isRequired,

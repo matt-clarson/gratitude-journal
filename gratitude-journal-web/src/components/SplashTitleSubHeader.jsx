@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import ComponentFactory from "./utils/ComponentFactory";
 import { classes } from "./utils/css";
-import { SplashCSS } from "./Splash";
+import { css as baseCss } from "./Splash";
 
 import "./styles/splash.scss";
 
@@ -11,7 +11,6 @@ const SplashTitleSubHeader = ({
   position = "default",
   ...baseProps
 }) => {
-  const baseCss = useContext(SplashCSS);
   const css = baseCss.elem`title-sub-header`;
   return (
     <ComponentFactory

@@ -1,26 +1,21 @@
-import React, { createContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import ComponentFactory from "./utils/ComponentFactory";
 import { bem } from "./utils/css";
 
 import "./styles/joined-content.scss";
 
-export const JoinedContentCSS = createContext();
+export const css = bem`rdp-joined-content`;
 
-const JoinedContent = ({ children, floatContent = "left", ...baseProps }) => {
-  const css = bem`rdp-joined-content`;
-  return (
-    <JoinedContentCSS.Provider value={css}>
-      <ComponentFactory
-        fixedClassName={css.mod`${floatContent}`}
-        defaultTag="section"
-        {...baseProps}
-      >
-        {children}
-      </ComponentFactory>
-    </JoinedContentCSS.Provider>
-  );
-};
+const JoinedContent = ({ children, floatContent = "left", ...baseProps }) => (
+  <ComponentFactory
+    fixedClassName={css.mod`${floatContent}`}
+    defaultTag="section"
+    {...baseProps}
+  >
+    {children}
+  </ComponentFactory>
+);
 
 JoinedContent.propTypes = {
   children: PropTypes.node.isRequired,

@@ -1,20 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import ComponentFactory from "./utils/ComponentFactory";
-import { DialogCSS } from "./Dialog";
+import { css } from "./Dialog";
 
-const DialogActions = ({ children, ...baseProps }) => {
-  const css = useContext(DialogCSS);
-  return (
-    <ComponentFactory
-      defaultTag="div"
-      fixedClassName={css.elem`actions`}
-      {...baseProps}
-    >
-      {children}
-    </ComponentFactory>
-  );
-};
+const DialogActions = ({ children, ...baseProps }) => (
+  <ComponentFactory
+    defaultTag="div"
+    fixedClassName={css.elem`actions`}
+    {...baseProps}
+  >
+    {children}
+  </ComponentFactory>
+);
 
 DialogActions.propTypes = {
   children: PropTypes.node.isRequired

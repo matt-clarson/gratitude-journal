@@ -6,7 +6,7 @@ import Spinner from "./Spinner";
 
 import "./styles/form.scss";
 
-export const FormCSS = createContext();
+export const css = bem`rdp-form`;
 export const FormContext = createContext({ autoControlled: false });
 
 const autoSubmit = (onSubmit, event) => {
@@ -27,31 +27,26 @@ const Form = ({
   onSubmit,
   children,
   ...baseProps
-}) => {
-  const css = bem`rdp-form`;
-  return (
-    <FormContext.Provider value={{ autoControlled }}>
-      <FormCSS.Provider value={css}>
-        <ComponentFactory
-          onSubmit={autoControlled ? autoSubmit.bind(null, onSubmit) : onSubmit}
-          fixedClassName={css}
-          defaultTag="form"
-          {...baseProps}
-        >
-          {submitting ? (
-            <Spinner
-              size="m"
-              message="Submitting..."
-              className={css.elem`spinner`}
-            />
-          ) : (
-            children
-          )}
-        </ComponentFactory>
-      </FormCSS.Provider>
-    </FormContext.Provider>
-  );
-};
+}) => (
+  <FormContext.Provider value={{ autoControlled }}>
+    <ComponentFactory
+      onSubmit={autoControlled ? autoSubmit.bind(null, onSubmit) : onSubmit}
+      fixedClassName={css}
+      defaultTag="form"
+      {...baseProps}
+    >
+      {submitting ? (
+        <Spinner
+          size="m"
+          message="Submitting..."
+          className={css.elem`spinner`}
+        />
+      ) : (
+        children
+      )}
+    </ComponentFactory>
+  </FormContext.Provider>
+);
 
 Form.propTypes = {
   autoControlled: PropTypes.bool,
