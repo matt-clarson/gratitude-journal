@@ -11,7 +11,9 @@
 .rdp-section {
   $self: &;
 
-  @include section-box &--raised {
+  @include section-box;
+
+  &--raised {
     @extend #{$self};
     @include section-shadow;
     border-color: rgba(0, 0, 0, 0);
