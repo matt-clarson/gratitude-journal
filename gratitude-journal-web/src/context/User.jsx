@@ -20,7 +20,13 @@ const UserProvider = ({ children }) => {
     setUserState(userValue);
   };
 
-  return <User.Provider value={{ user, setUser }}>{children}</User.Provider>;
+  const logoutUser = () => setUser({ authorised: false });
+
+  return (
+    <User.Provider value={{ user, setUser, logoutUser }}>
+      {children}
+    </User.Provider>
+  );
 };
 
 UserProvider.propTypes = {
