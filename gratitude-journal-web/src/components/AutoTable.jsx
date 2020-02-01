@@ -10,10 +10,19 @@ import TableRow from "./TableRow";
 
 export const actionColumnPositions = { LEADING: Symbol(), TRAILING: Symbol() };
 
-const ActionColumnCell = ({ dataId, actionColumn, actionColumnAction }) =>
+const ActionColumnCell = ({
+  actionColumnTitle,
+  dataId,
+  actionColumn,
+  actionColumnAction
+}) =>
   actionColumn ? (
     <TableData>
-      <Button transparent onClick={event => actionColumnAction(dataId, event)}>
+      <Button
+        title={actionColumnTitle}
+        transparent
+        onClick={event => actionColumnAction(dataId, event)}
+      >
         <Icon icon={actionColumn} />
       </Button>
     </TableData>
@@ -30,6 +39,7 @@ const AutoTable = ({
   actionColumn,
   actionColumnAction = NO_OP,
   actionColumnPosition = actionColumnPositions.TRAILING,
+  actionColumnTitle,
   ...baseProps
 }) => {
   return (
@@ -60,7 +70,7 @@ const AutoTable = ({
               {actionColumnPosition === actionColumnPositions.LEADING && (
                 <ActionColumnCell
                   dataId={id.value}
-                  {...{ actionColumn, actionColumnAction }}
+                  {...{ actionColumn, actionColumnAction, actionColumnTitle }}
                 />
               )}
               {headers.map(({ key }) => {
@@ -74,7 +84,7 @@ const AutoTable = ({
               {actionColumnPosition === actionColumnPositions.TRAILING && (
                 <ActionColumnCell
                   dataId={id.value}
-                  {...{ actionColumn, actionColumnAction }}
+                  {...{ actionColumn, actionColumnAction, actionColumnTitle }}
                 />
               )}
             </TableRow>
