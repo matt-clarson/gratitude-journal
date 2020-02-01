@@ -6,18 +6,8 @@ from graphene.test import Client
 
 from entries.models import Entry
 from entries.schema import Query, Mutation
+from entries.tests.fixtures import TEST_ENTRY_MUTATION
 
-TEST_ENTRY_MUTATION = '''
-    mutation {
-        createEntry(content: "this is a test entry") {
-            id
-            content
-            postedBy {
-                username
-            }
-        }
-    }
-'''
 class TestCreateEntry(TestCase):
     def setUp(self):
         self.schema = Schema(query=Query, mutation=Mutation)

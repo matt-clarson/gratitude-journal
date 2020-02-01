@@ -32,6 +32,24 @@ class CreateEntry(graphene.Mutation):
             posted_by=user
         )
 
+class DeleteEntry(graphene.Mutation):
+    id = graphene.Int()
+
+    class Arguments:
+        id = graphene.Int()
+
+    def mutate(self, info, id):
+        user = get_authenticated_user(info)
+
+        try:
+            entry = user.entry_set.get(id=id)
+            entry.delete()
+        except Entry.DoesNotExist:
+            raise GraphQLError(f'Cannot find entry with id "{id}" to delete it')
+
+        return DeleteEntry(id=id)
+
+
 class Query(graphene.ObjectType):
     my_entries = graphene.List(EntryType)
     random_entry = graphene.Field(EntryType)
@@ -47,3 +65,4 @@ class Query(graphene.ObjectType):
 
 class Mutation(graphene.ObjectType):
     create_entry = CreateEntry.Field()
+    delete_entry = DeleteEntry.Field()
