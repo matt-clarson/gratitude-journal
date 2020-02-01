@@ -19,14 +19,15 @@ describe("create entry page", function() {
       cy.fixture("users/existing-users").then(([, someUser]) =>
         cy.beUser(someUser)
       );
-      cy.visit("/create");
     });
 
     it("should match snapshot", function() {
+      cy.visit("/create");
       cy.document().toMatchImageSnapshot();
     });
 
     it("should notify when form is submitted empty", function() {
+      cy.visit("/create");
       cy.get("form")
         .contains("button", "Post")
         .click();
@@ -40,6 +41,12 @@ describe("create entry page", function() {
 
     it("should create new entry and redirect to entries page", function() {
       const entryContent = "Some test entry contents";
+      cy.visit("/entries");
+      cy.get("table")
+        .contains(entryContent)
+        .should("not.exist");
+      cy.get('a[title="Create Entry"]').click();
+
       cy.get("form")
         .contains("label", "Journal Entry")
         .invoke("attr", "id")

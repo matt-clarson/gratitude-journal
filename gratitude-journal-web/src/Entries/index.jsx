@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useQuery, useMutation } from "urql";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AutoTable from "../components/AutoTable";
 import Section from "../components/Section";
 import Spinner from "../components/Spinner";
@@ -10,8 +10,10 @@ import { headers, formatData } from "./utils";
 import "./style.scss";
 
 const Entries = () => {
+  const location = useLocation();
   const [getEntriesResponse, refetchEntries] = useQuery({
-    query: GET_ENTRIES
+    query: GET_ENTRIES,
+    requestPolicy: location.state?.refresh ? "network-only" : "cache-first"
   });
   const [deleteEntryResponse, deleteEntry] = useMutation(DELETE_ENTRY);
 

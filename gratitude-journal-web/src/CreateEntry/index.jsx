@@ -12,7 +12,8 @@ const CreateEntry = () => {
   const history = useHistory();
   const [creationResponse, executeCreation] = useMutation(CREATE_ENTRY);
   useEffect(() => {
-    if (creationResponse.data?.createEntry?.id) history.push("/entries");
+    if (creationResponse.data?.createEntry?.id)
+      history.push("/entries", { refresh: true });
   }, [creationResponse, history]);
   return (
     <div className="gj-create-entry">
