@@ -10,10 +10,10 @@ import TableRow from "./TableRow";
 
 export const actionColumnPositions = { LEADING: Symbol(), TRAILING: Symbol() };
 
-const ActionColumnCell = ({ actionColumn, actionColumnAction }) =>
+const ActionColumnCell = ({ dataId, actionColumn, actionColumnAction }) =>
   actionColumn ? (
     <TableData>
-      <Button transparent onClick={actionColumnAction}>
+      <Button transparent onClick={event => actionColumnAction(dataId, event)}>
         <Icon icon={actionColumn} />
       </Button>
     </TableData>
@@ -36,7 +36,8 @@ const AutoTable = ({
     <Table {...{ title, ...baseProps }}>
       <TableHeader>
         <TableRow>
-          {actionColumn &&
+          {data.length > 0 &&
+            actionColumn &&
             actionColumnPosition === actionColumnPositions.LEADING && (
               <TableData tag="th" />
             )}
@@ -45,7 +46,8 @@ const AutoTable = ({
               {name}
             </TableData>
           ))}
-          {actionColumn &&
+          {data.length > 0 &&
+            actionColumn &&
             actionColumnPosition === actionColumnPositions.TRAILING && (
               <TableData tag="th" />
             )}
@@ -56,7 +58,10 @@ const AutoTable = ({
           data.map(({ id, ...dataEntry }) => (
             <TableRow key={id.value}>
               {actionColumnPosition === actionColumnPositions.LEADING && (
-                <ActionColumnCell {...{ actionColumn, actionColumnAction }} />
+                <ActionColumnCell
+                  dataId={id.value}
+                  {...{ actionColumn, actionColumnAction }}
+                />
               )}
               {headers.map(({ key }) => {
                 const { value, display, ...props } = dataEntry[key];
@@ -67,7 +72,10 @@ const AutoTable = ({
                 );
               })}
               {actionColumnPosition === actionColumnPositions.TRAILING && (
-                <ActionColumnCell {...{ actionColumn, actionColumnAction }} />
+                <ActionColumnCell
+                  dataId={id.value}
+                  {...{ actionColumn, actionColumnAction }}
+                />
               )}
             </TableRow>
           ))
