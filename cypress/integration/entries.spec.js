@@ -26,6 +26,21 @@ describe("entries page", function() {
       cy.contains("Your gratitude journal entries").trigger("mouseover");
       cy.document().toMatchImageSnapshot();
     });
+
+    it("should delete entry when delete button clicked", function() {
+      cy.get("tbody > tr")
+        .children()
+        .first()
+        .invoke("text")
+        .as("entryContent");
+
+      cy.get('button[title="Delete Entry"]')
+        .first()
+        .click()
+        .then(function() {
+          cy.contains("td", this.entryContent).should("not.exist");
+        });
+    });
   });
 
   describe("as new user", function() {

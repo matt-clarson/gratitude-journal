@@ -1,27 +1,40 @@
-import React, { useCallback } from "react";
-import { useQuery } from "urql";
+import React, { useCallback, useEffect } from "react";
+import { useQuery, useMutation } from "urql";
 import { Link } from "react-router-dom";
 import AutoTable from "../components/AutoTable";
 import Section from "../components/Section";
 import Spinner from "../components/Spinner";
-import { GET_ENTRIES } from "./queries";
+import { DELETE_ENTRY, GET_ENTRIES } from "./queries";
 import { headers, formatData } from "./utils";
 
 import "./style.scss";
 
 const Entries = () => {
-  const [response] = useQuery({ query: GET_ENTRIES });
-  const formatDataCallback = useCallback(() => formatData(response.data), [
-    response.data
-  ]);
-  const data = formatDataCallback(response.data);
+  const [getEntriesResponse, refetchEntries] = useQuery({
+    query: GET_ENTRIES
+  });
+  const [deleteEntryResponse, deleteEntry] = useMutation(DELETE_ENTRY);
+
+  useEffect(() => {
+    if (deleteEntryResponse.data?.deleteEntry?.id)
+      refetchEntries({ requestPolicy: "network-only" });
+  }, [deleteEntryResponse, refetchEntries]);
+
+  const formatDataCallback = useCallback(
+    () => formatData(getEntriesResponse.data),
+    [getEntriesResponse.data]
+  );
+  const data = formatDataCallback(getEntriesResponse.data);
   return (
     <div className="gj-entries">
       <Section flat>
         <h2>{"Entries"}</h2>
-        {response.data?.myEntries ? (
+        {getEntriesResponse.data?.myEntries ? (
           <AutoTable
             title="Your gratitude journal entries"
+            actionColumn="delete"
+            actionColumnAction={id => deleteEntry({ id })}
+            actionColumnTitle="Delete Entry"
             emptyMessage={
               <span>
                 {"You do not have any entries, "}

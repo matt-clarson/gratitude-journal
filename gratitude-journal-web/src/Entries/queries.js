@@ -7,3 +7,11 @@ export const GET_ENTRIES = `
     }
   }
 `;
+
+export const DELETE_ENTRY = `
+  mutation DeleteEntry($id: Int) {
+    deleteEntry(id: $id) {
+      id
+    }
+  }
+`;
