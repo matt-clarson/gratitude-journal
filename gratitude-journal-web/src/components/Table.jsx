@@ -9,7 +9,7 @@ export const css = bem`rdp-table`;
 
 const Table = ({ children, title, ...baseProps }) => (
   <ComponentFactory
-    cellspacing={0}
+    cellSpacing={0}
     defaultTag="table"
     fixedClassName={css}
     {...baseProps}
