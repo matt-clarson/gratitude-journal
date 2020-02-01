@@ -16,7 +16,7 @@ const TableData = ({ align = "left", colWidth, children, ...baseProps }) => (
 );
 
 TableData.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node
 };
 
 export default TableData;

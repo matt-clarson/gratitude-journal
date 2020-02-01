@@ -5,8 +5,15 @@ import { bem } from "./utils/css";
 
 import "./styles/button.scss";
 
-const Button = ({ type, disabled, onClick, children, ...baseProps }) => {
-  const css = bem`rdp-button`;
+const Button = ({
+  transparent,
+  type,
+  disabled,
+  onClick,
+  children,
+  ...baseProps
+}) => {
+  const css = transparent ? bem`rdp-transparent-button` : bem`rdp-button`;
   return (
     <ComponentFactory
       onClick={onClick ?? (() => {})}
@@ -24,7 +31,8 @@ const Button = ({ type, disabled, onClick, children, ...baseProps }) => {
 Button.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.node,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  transparent: PropTypes.bool
 };
 
 export default Button;

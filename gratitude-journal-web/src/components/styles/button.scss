@@ -46,6 +46,11 @@
   }
 }
 
+.rdp-transparent-button {
+  @extend %button-base;
+  @extend %transparent-button;
+}
+
 .rdp-floating-action-button {
   $self: &;
   position: fixed;
