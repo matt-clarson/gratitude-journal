@@ -40,12 +40,7 @@ const AppHeader = () => {
           )}
         </HeaderActions>
       </Header>
-      <Dialog
-        onClick={console.log.bind(console)}
-        open={open}
-        onClose={() => setOpen(false)}
-        size="m"
-      >
+      <Dialog open={open} onClose={() => setOpen(false)} size="m">
         <DialogTitle closeButton>{"Account Information"}</DialogTitle>
         <DialogContent>
           <h5>{"Username:"}</h5>
