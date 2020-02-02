@@ -6,3 +6,11 @@ export const USER_INFO = `
     }
   }
 `;
+
+export const DELETE_ACCOUNT = `
+  mutation DeleteAccount($password: String!) {
+    deleteUser(password: $password) {
+      id
+    }
+  }
+`;
