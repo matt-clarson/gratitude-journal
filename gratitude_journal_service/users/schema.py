@@ -35,6 +35,21 @@ class CreateUser(graphene.Mutation):
 
         return CreateUser(user=user, token=jwt)
 
+class DeleteUser(graphene.Mutation):
+    id = graphene.Int()
+
+    class Arguments:
+        password = graphene.String(required=True)
+
+    def mutate(self, info, password):
+        user = get_authenticated_user(info)
+        if not user.check_password(password):
+            raise GraphQLError('Please enter correct password')
+        user.entry_set.all().delete()
+        user_id = user.id
+        user.delete()
+        return DeleteUser(id=user_id)
+
 class Query(graphene.ObjectType):
     users = graphene.List(UserType)
     me = graphene.Field(UserType)
@@ -47,3 +62,4 @@ class Query(graphene.ObjectType):
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
+    delete_user = DeleteUser.Field()
