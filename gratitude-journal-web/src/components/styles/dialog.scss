@@ -9,7 +9,8 @@
 
 @mixin dialog-size($width, $height) {
   width: $width;
-  height: $height;
+  min-height: $height;
+  max-height: 90vh;
   top: calc(50vh - (#{$height} / 2));
   left: calc(50vw - (#{$width} / 2));
 }
@@ -34,8 +35,6 @@
   left: 0;
   margin: 0;
   padding: 0;
-  width: 300px;
-  height: 300px;
   background: white;
   @include section-box;
   @include section-shadow;
@@ -86,5 +85,9 @@
     align-items: center;
     justify-content: flex-end;
     padding: 2vh 5px;
+
+    :not(:first-child) {
+      margin-left: 10px;
+    }
   }
 }

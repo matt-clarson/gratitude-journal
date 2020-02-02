@@ -28,6 +28,12 @@
     }
   }
 
+  &--danger {
+    @extend #{$self};
+    background-color: var(--rdp-theme-error);
+    border-color: var(--rdp-theme-error);
+  }
+
   &--disabled {
     @extend #{$self};
     background-color: rgb(200, 200, 200);

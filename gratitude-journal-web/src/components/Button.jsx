@@ -11,6 +11,7 @@ const Button = ({
   disabled,
   onClick,
   children,
+  danger,
   ...baseProps
 }) => {
   const css = transparent ? bem`rdp-transparent-button` : bem`rdp-button`;
@@ -18,7 +19,9 @@ const Button = ({
     <ComponentFactory
       onClick={onClick ?? (() => {})}
       defaultTag="button"
-      fixedClassName={disabled ? css.mod`disabled` : css}
+      fixedClassName={
+        disabled ? css.mod`disabled` : danger ? css.mod`danger` : css
+      }
       type={type}
       disabled={disabled}
       {...baseProps}

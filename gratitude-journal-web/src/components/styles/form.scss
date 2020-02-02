@@ -40,5 +40,10 @@
 
   &__actions {
     padding-top: 2vh;
+    padding-bottom: 2vh;
+
+    :not(:first-child) {
+      margin-left: 10px;
+    }
   }
 }
