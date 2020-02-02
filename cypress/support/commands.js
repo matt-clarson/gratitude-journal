@@ -39,6 +39,12 @@ Cypress.Commands.add("logIn", userInfo =>
     .click()
 );
 
+Cypress.Commands.add("deleteAccount", userInfo =>
+  fillForm([["Password", "password"]], userInfo)
+    .contains("button", "Delete")
+    .click()
+);
+
 Cypress.Commands.add("beUser", function({ username, password }) {
   cy.request("POST", `http://localhost:8000/graphql/`, {
     query: `

@@ -57,4 +57,40 @@ describe("account info", function() {
       cy.location("pathname").should("equal", "/welcome");
     });
   });
+
+  describe("delete account", function() {
+    beforeEach(function() {
+      cy.visit("/");
+      cy.get('button[title="Account Info"]').click();
+      cy.contains("button", "Delete Account").click();
+    });
+
+    it("should match snapshot", function() {
+      cy.document().toMatchImageSnapshot();
+    });
+
+    it("should error if user enters incorrect password", function() {
+      cy.deleteAccount({ password: "wrong password" });
+      cy.get("dialog").contains("Please enter correct password");
+    });
+
+    it("should be cancelable", function() {
+      cy.contains("button", "Cancel").click();
+      cy.get("dialog")
+        .get("form")
+        .should("not.exist");
+    });
+
+    it("should delete user account", function() {
+      cy.fixture("users/existing-users.json").then(([someUser]) =>
+        cy.deleteAccount(someUser)
+      );
+      cy.location("pathname").should("equal", "/welcome");
+      cy.visit("/log-in");
+      cy.fixture("users/existing-users.json").then(([someUser]) =>
+        cy.logIn(someUser)
+      );
+      cy.get("form").contains("Please, enter valid credentials");
+    });
+  });
 });
