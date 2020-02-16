@@ -10,3 +10,6 @@ db.sqlite3
 # cypress
 cypress/videos
 cypress/screenshots
+
+# secrets
+.secrets/

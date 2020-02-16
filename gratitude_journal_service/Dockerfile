@@ -9,9 +9,13 @@ RUN apk add --no-cache bash && \
     pip install -r requirements.txt --no-cache-dir && \
     apk --purge del .build-deps
 
-FROM base AS service
+FROM base AS prod_build
+WORKDIR /server
+COPY . /server
+RUN pip install gunicorn --no-cache-dir
+
+FROM prod_build AS service
 WORKDIR /server
 COPY . /server
 
 EXPOSE 8000
-CMD ["./manage.py", "runserver", "0.0.0.0:8000"]

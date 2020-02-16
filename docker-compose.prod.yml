@@ -10,6 +10,10 @@ services:
   service:
     depends_on:
       - db
+    environment:
+      SECRET_KEY_FILE: /run/secrets/service_key
+    secrets:
+      - service_key
 
   ui:
     depends_on:
@@ -17,3 +21,7 @@ services:
       - service
     environment:
       GRAPHQL_FORWARD_TO: service:8000
+
+secrets:
+  service_key:
+    file: .secrets/secret-key

@@ -24,7 +24,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'd-rp1h+%2n21$_6)@vlmvxqjao=z8cf%w*5-d%$ch4g8%-nnsp'
+if DEV_MODE:
+    SECRET_KEY = 'd-rp1h+%2n21$_6)@vlmvxqjao=z8cf%w*5-d%$ch4g8%-nnsp'
+else:
+    with open(os.environ.get('SECRET_KEY_FILE'), 'r') as f:
+        SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = DEV_MODE
@@ -39,7 +43,9 @@ log_levels = {
     'off': 80
 }
 LOG_LEVEL = log_levels[os.environ.get('LOG_LEVEL', 'critical')]
-logging.basicConfig(level=LOG_LEVEL)
+LOG_FORMAT = '[%(asctime)s] [%(process)d] [%(levelname)s] %(message)s'
+LOG_DATE_FORMAT = '%Y-%m-%d %H:%M:%S %z'
+logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT, datefmt=LOG_DATE_FORMAT)
 
 ALLOWED_HOSTS = ["*"]
 
