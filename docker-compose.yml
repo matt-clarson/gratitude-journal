@@ -20,9 +20,6 @@ services:
   ui:
     build:
       context: ./gratitude-journal-web
-    command: "npm start"
-    environment:
-      PORT: 3000
     image: gj-web:build
     ports:
-      - "3000:3000"
+      - "3000:80"

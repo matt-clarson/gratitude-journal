@@ -67,10 +67,15 @@ services:
     build:
       context: ./gratitude-journal-web
       target: base
+    command: 'npm start'
     depends_on:
       - db
       - service
+    environment:
+      PORT: 3000
     image: gj-web:dev
+    ports:
+      - "3000:3000"
     volumes:
       - ./gratitude-journal-web/src:/app/src
       - ./gratitude-journal-web/config:/app/config

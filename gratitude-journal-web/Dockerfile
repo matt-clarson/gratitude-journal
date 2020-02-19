@@ -9,10 +9,6 @@ WORKDIR /app
 COPY . /app
 RUN npm run build
 
-FROM node:13.6.0-alpine3.11
-COPY --from=app-build /app/build /var/www/site
-ENV STATIC_DIR=/var/www/site
-WORKDIR /server
-COPY ./server /server
-RUN npm ci --only-production
-CMD ["node", "index.js"]
+FROM nginx:1.17.8-alpine-perl
+COPY --from=app-build /app/build /data/www
+COPY ./nginx.conf /etc/nginx/nginx.conf

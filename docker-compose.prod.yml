@@ -19,8 +19,6 @@ services:
     depends_on:
       - db
       - service
-    environment:
-      GRAPHQL_FORWARD_TO: service:8000
 
 secrets:
   service_key:
