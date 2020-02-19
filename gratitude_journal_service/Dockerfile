@@ -15,7 +15,11 @@ COPY . /server
 RUN pip install gunicorn --no-cache-dir
 
 FROM prod_build AS service
+RUN addgroup -S gj-service && \
+    adduser gj-service -H -S -s /bin/false -g gj-service
 WORKDIR /server
-COPY . /server
+COPY --chown=gj-service:gj-service . /server
+
+USER gj-service
 
 EXPOSE 8000
