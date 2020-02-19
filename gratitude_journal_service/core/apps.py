@@ -11,3 +11,4 @@ class CoreConfig(AppConfig):
     def ready(self):
         logging.info('Launching Gratitude Journal Service')
         logging.debug(f'Using secret key: {settings.SECRET_KEY}')
+        logging.debug(f"Using db password: {settings.DATABASES['default']['PASSWORD']}")

@@ -102,12 +102,18 @@ WSGI_APPLICATION = 'gratitude_journal_service.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+try:
+    with open(os.environ.get('DB_PASSWORD_FILE'), 'r') as f:
+        _db_password = f.read().strip()
+except:
+    _db_password = None
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DB_NAME', 'postgres'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', None),
+        'PASSWORD': _db_password,
         'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT', 5432)
     }

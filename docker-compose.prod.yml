@@ -3,7 +3,11 @@ volumes:
   prod-db:
 services:
   db:
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
     image: postgres:12.1-alpine
+    secrets:
+      - postgres_password
     volumes:
       - "prod-db:/var/lib/postgresql/data"
 
@@ -11,15 +15,22 @@ services:
     depends_on:
       - db
     environment:
+      DB_PASSWORD_FILE: /run/secrets/postgres_password
+      LOG_LEVEL: info
       SECRET_KEY_FILE: /run/secrets/service_key
     secrets:
+      - postgres_password
       - service_key
 
   ui:
     depends_on:
       - db
       - service
+    ports:
+      - "3000:80"
 
 secrets:
   service_key:
     file: .secrets/secret-key
+  postgres_password:
+    file: .secrets/postgres-password
