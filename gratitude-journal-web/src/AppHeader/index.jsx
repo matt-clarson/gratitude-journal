@@ -5,10 +5,12 @@ import HeaderTitle from "../components/HeaderTitle";
 import HeaderActions from "../components/HeaderActions";
 import HeaderActionButton from "../components/HeaderActionButton";
 import AccountInfo from "./AccountInfo";
+import AppInfo from "./AppInfo";
 
 const AppHeader = () => {
   const match = useRouteMatch("/(welcome|log-in|sign-up)");
-  const [open, setOpen] = useState(false);
+  const [accountInfoOpen, setAccountInfoOpen] = useState(false);
+  const [appInfoOpen, setAppInfoOpen] = useState(false);
   return (
     <>
       <Header>
@@ -21,12 +23,20 @@ const AppHeader = () => {
             <HeaderActionButton
               title="Account Info"
               icon={"account_circle"}
-              onClick={() => setOpen(true)}
+              onClick={() => setAccountInfoOpen(true)}
             />
           )}
+          <HeaderActionButton
+            title="App Info"
+            icon={"help"}
+            onClick={() => setAppInfoOpen(true)}
+          />
         </HeaderActions>
       </Header>
-      {!match && <AccountInfo {...{ open, setOpen }} />}
+      {!match && (
+        <AccountInfo open={accountInfoOpen} setOpen={setAccountInfoOpen} />
+      )}
+      <AppInfo open={appInfoOpen} setOpen={setAppInfoOpen} />
     </>
   );
 };
