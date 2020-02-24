@@ -10,7 +10,10 @@ A web-app for recording gratitudes
 To run the app in prodution:
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml -e GJ_APP_BUILD=$(./print-build.sh) up
+# build images, passing in the current build info from git
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml build --build-args build=$(git describe --tags)
+# create / update containers with the images built previously
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --detach
 ```
 
 This will start a database container, the service container, and the UI container.

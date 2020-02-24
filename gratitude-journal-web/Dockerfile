@@ -5,6 +5,8 @@ RUN apk add --no-cache python make g++
 RUN npm ci
 
 FROM base AS app-build
+ARG build
+ENV GJ_APP_BUILD=$build
 WORKDIR /app
 COPY . /app
 RUN npm run build
