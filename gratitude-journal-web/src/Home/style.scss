@@ -1,10 +1,17 @@
 @import "../common/styles.scss";
 
+@mixin mediaFlexBasis {
+  @media only screen and (max-width: 700px) {
+    flex-basis: auto;
+  }
+}
+
 .gj-home {
   @extend %page-content;
 
   &__about {
     flex-basis: 60%;
+    @include mediaFlexBasis;
 
     &__article-svg {
       float: left;
@@ -18,5 +25,6 @@
 
   &__links {
     flex-basis: min-content;
+    @include mediaFlexBasis;
   }
 }
