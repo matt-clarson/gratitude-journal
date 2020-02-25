@@ -3,6 +3,9 @@
   justify-content: center;
   align-items: center;
   padding: 10vh 0;
+  @media only screen and (max-width: 700px) {
+    padding: 0 0 10vh 0;
+  }
 
   .primary {
     &-polygon {
