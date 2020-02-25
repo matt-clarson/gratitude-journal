@@ -13,6 +13,10 @@
   max-height: 90vh;
   top: calc(50vh - (#{$height} / 2));
   left: calc(50vw - (#{$width} / 2));
+  @media #{$screenWidthBreakpoint} {
+    width: 90vw;
+    left: 5vw;
+  }
 }
 
 .rdp-dialog__backdrop {
