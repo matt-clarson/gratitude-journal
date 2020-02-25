@@ -15,6 +15,7 @@
   width: 100vw;
   height: 100vh;
   padding-top: 25vh;
+  text-align: left;
 
   &--left {
     align-items: flex-start;
@@ -22,6 +23,7 @@
 
   &--right {
     align-items: flex-end;
+    text-align: right;
   }
 
   &--centre {
