@@ -1,3 +1,5 @@
+@import "./common.scss";
+
 @mixin section-box {
   border-radius: 10px;
   border: 1px solid rgb(128, 128, 128);
@@ -30,9 +32,15 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: 10vh 10vw;
+  @media #{$screenWidthBreakpoint} {
+    padding: 0;
+  }
 
   [class^="rdp-section"] {
     margin: 20px;
     transition: box-shadow 150ms ease-in;
+    @media #{$screenWidthBreakpoint} {
+      margin: 20px 5px;
+    }
   }
 }
