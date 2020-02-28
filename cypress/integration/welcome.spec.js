@@ -1,4 +1,5 @@
 import { fixCypressSpec } from "../support/fix-spec";
+import viewports from "../support/viewports";
 
 describe("welcome page", function() {
   before(function() {
@@ -6,6 +7,16 @@ describe("welcome page", function() {
   });
 
   beforeEach(fixCypressSpec(__filename));
+
+  describe("mobile-viewports", function() {
+    viewports.forEach(([preset, orientation]) =>
+      it(`should match snapshot correctly for ${preset} ${orientation}`, function() {
+        cy.viewport(preset, orientation);
+        cy.visit("/welcome");
+        cy.document().toMatchImageSnapshot();
+      })
+    );
+  });
 
   it("should match snapshot", function() {
     cy.visit("/welcome");

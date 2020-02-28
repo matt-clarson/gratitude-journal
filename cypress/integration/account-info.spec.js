@@ -1,4 +1,5 @@
 import { fixCypressSpec } from "../support/fix-spec";
+import viewports from "../support/viewports";
 
 describe("account info", function() {
   before(function() {
@@ -9,6 +10,17 @@ describe("account info", function() {
   beforeEach(function() {
     cy.fixture("users/existing-users.json").then(([someUser]) =>
       cy.beUser(someUser)
+    );
+  });
+
+  describe("mobile-viewports", function() {
+    viewports.forEach(([preset, orientation]) =>
+      it(`should match snapshot correctly for ${preset} ${orientation}`, function() {
+        cy.viewport(preset, orientation);
+        cy.visit("/");
+        cy.get('button[title="Account Info"]').click();
+        cy.document().toMatchImageSnapshot();
+      })
     );
   });
 

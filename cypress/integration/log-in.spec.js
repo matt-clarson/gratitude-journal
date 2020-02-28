@@ -1,4 +1,5 @@
 import { fixCypressSpec } from "../support/fix-spec";
+import viewports from "../support/viewports";
 import users from "../fixtures/users/existing-users.json";
 
 describe("log in page", function() {
@@ -9,6 +10,16 @@ describe("log in page", function() {
   beforeEach(fixCypressSpec(__filename));
   beforeEach(function() {
     cy.visit("/log-in");
+  });
+
+  describe("mobile-viewports", function() {
+    viewports.forEach(([preset, orientation]) =>
+      it(`should match snapshot correctly for ${preset} ${orientation}`, function() {
+        cy.viewport(preset, orientation);
+        cy.visit("/log-in");
+        cy.document().toMatchImageSnapshot();
+      })
+    );
   });
 
   it("should match snapshot", function() {

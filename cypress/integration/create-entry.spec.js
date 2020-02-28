@@ -1,4 +1,5 @@
 import { fixCypressSpec } from "../support/fix-spec";
+import viewports from "../support/viewports";
 
 describe("create entry page", function() {
   before(function() {
@@ -18,6 +19,16 @@ describe("create entry page", function() {
     beforeEach(function() {
       cy.fixture("users/existing-users").then(([, someUser]) =>
         cy.beUser(someUser)
+      );
+    });
+
+    describe("mobile-viewports", function() {
+      viewports.forEach(([preset, orientation]) =>
+        it(`should match snapshot correctly for ${preset} ${orientation}`, function() {
+          cy.viewport(preset, orientation);
+          cy.visit("/create");
+          cy.document().toMatchImageSnapshot();
+        })
       );
     });
 
@@ -42,7 +53,7 @@ describe("create entry page", function() {
     it("should create new entry and redirect to entries page", function() {
       const entryContent = "Some test entry contents";
       cy.visit("/entries");
-      cy.get("table")
+      cy.get("ul")
         .contains(entryContent)
         .should("not.exist");
       cy.get('a[title="Create Entry"]').click();
@@ -58,7 +69,7 @@ describe("create entry page", function() {
         .click();
 
       cy.location("pathname").should("equal", "/entries");
-      cy.get("table").contains(entryContent);
+      cy.get("ul").contains(entryContent);
     });
   });
 });

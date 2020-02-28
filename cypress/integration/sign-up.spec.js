@@ -1,4 +1,5 @@
 import { fixCypressSpec } from "../support/fix-spec";
+import viewports from "../support/viewports";
 
 describe("Sign Up Functionality", function() {
   before(function() {
@@ -6,6 +7,16 @@ describe("Sign Up Functionality", function() {
   });
 
   beforeEach(fixCypressSpec(__filename));
+
+  describe("mobile-viewports", function() {
+    viewports.forEach(([preset, orientation]) =>
+      it(`should match snapshot correctly for ${preset} ${orientation}`, function() {
+        cy.viewport(preset, orientation);
+        cy.visit("/sign-up");
+        cy.document().toMatchImageSnapshot();
+      })
+    );
+  });
 
   it("should match snapshot", function() {
     cy.visit("/sign-up").then(() => cy.document().toMatchImageSnapshot());
