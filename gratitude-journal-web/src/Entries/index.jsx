@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from "react";
 import { useQuery, useMutation } from "urql";
-import { Link, useLocation } from "react-router-dom";
-import AutoTable from "../components/AutoTable";
+import { useLocation } from "react-router-dom";
 import Section from "../components/Section";
 import Spinner from "../components/Spinner";
+import EntriesList from "./EntriesList";
 import { DELETE_ENTRY, GET_ENTRIES } from "./queries";
-import { headers, formatData } from "./utils";
+import { formatData } from "./utils";
 
 import "./style.scss";
 
@@ -32,20 +32,7 @@ const Entries = () => {
       <Section flat>
         <h2>{"Entries"}</h2>
         {getEntriesResponse.data?.myEntries ? (
-          <AutoTable
-            title="Your gratitude journal entries"
-            actionColumn="delete"
-            actionColumnAction={id => deleteEntry({ id })}
-            actionColumnTitle="Delete Entry"
-            emptyMessage={
-              <span>
-                {"You do not have any entries, "}
-                <Link to="/create">{"click here to add an entry"}</Link>
-                {"."}
-              </span>
-            }
-            {...{ headers, data }}
-          />
+          <EntriesList data={data} deleteEntry={id => deleteEntry({ id })} />
         ) : (
           <Spinner tag="span" size="m" message="Loading..." />
         )}
