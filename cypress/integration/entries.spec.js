@@ -23,13 +23,12 @@ describe("entries page", function() {
     });
 
     it("should match snapshot", function() {
-      cy.contains("Your gratitude journal entries").trigger("mouseover");
+      cy.contains("Entries").trigger("mouseover");
       cy.document().toMatchImageSnapshot();
     });
 
     it("should delete entry when delete button clicked", function() {
-      cy.get("tbody > tr")
-        .children()
+      cy.get("ul > li")
         .first()
         .invoke("text")
         .as("entryContent");
@@ -38,7 +37,7 @@ describe("entries page", function() {
         .first()
         .click()
         .then(function() {
-          cy.contains("td", this.entryContent).should("not.exist");
+          cy.contains("li", this.entryContent).should("not.exist");
         });
     });
   });
@@ -52,7 +51,7 @@ describe("entries page", function() {
     });
 
     it("should match snapshot", function() {
-      cy.contains("Your gratitude journal entries").trigger("mouseover");
+      cy.contains("Entries").trigger("mouseover");
       cy.document().toMatchImageSnapshot();
     });
   });

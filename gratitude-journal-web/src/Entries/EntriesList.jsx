@@ -12,7 +12,11 @@ const EntriesList = ({ data, deleteEntry }) => (
         <ListItem key={id}>
           <ListItemText>{created}</ListItemText>
           <ListItemText secondary>{content}</ListItemText>
-          <ListItemActionButton icon="delete" onClick={() => deleteEntry(id)} />
+          <ListItemActionButton
+            title="Delete Entry"
+            icon="delete"
+            onClick={() => deleteEntry(id)}
+          />
         </ListItem>
       ))
     ) : (
