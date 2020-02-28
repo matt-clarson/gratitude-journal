@@ -1,0 +1,44 @@
+@import "./common.scss";
+
+.rdp-list {
+  list-style: none;
+  padding: 0;
+
+  &__item {
+    padding: 2vh 0 1vh 0;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    display: grid;
+    grid-template-areas:
+      "btn-l text-p btn-r"
+      "btn-l text-s btn-r";
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 2fr;
+    grid-row-gap: 10px;
+
+    &:hover {
+      background-color: rgb(232, 232, 232);
+    }
+  }
+
+  &__item-text {
+    grid-area: text-p;
+    font-weight: bold;
+
+    &--secondary {
+      grid-area: text-s;
+    }
+  }
+
+  &__item-action-button {
+    @extend %button-base;
+    @extend %transparent-button;
+
+    &:first-child {
+      grid-area: btn-l;
+    }
+
+    &:last-child {
+      grid-area: btn-r;
+    }
+  }
+}
