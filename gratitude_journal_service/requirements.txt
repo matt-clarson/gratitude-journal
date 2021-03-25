@@ -15,7 +15,7 @@ psycopg2-binary==2.8.4
 Pygments==2.5.2
 PyJWT==1.7.1
 pytz==2019.3
-PyYAML==5.3
+PyYAML==5.4
 redgreenunittest==0.1.1
 Rx==1.6.1
 singledispatch==3.4.0.3
